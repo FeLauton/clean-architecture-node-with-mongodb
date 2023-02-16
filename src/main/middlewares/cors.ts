@@ -4,9 +4,9 @@ export const cors = (
   request: Request,
   response: Response,
   next: NextFunction
-) => {
-  response.setHeader("access-control-allow-origin", "*");
-  response.setHeader("access-control-allow-methods", "*");
-  response.setHeader("access-control-allow-headers", "*");
+): void => {
+  response.set("access-control-allow-origin", "*");
+  response.set("access-control-allow-methods", "*");
+  response.set("access-control-allow-headers", "*");
   next();
 };

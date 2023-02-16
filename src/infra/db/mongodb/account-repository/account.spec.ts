@@ -22,7 +22,7 @@ describe("Account Mongo Repository", () => {
     const sut = makeSut();
     const account = await sut.add({
       name: "any_name",
-      email: "any_email",
+      email: "any_email@mail.com",
       password: "any_password",
     });
     expect(account).toBeTruthy();

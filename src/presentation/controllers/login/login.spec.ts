@@ -1,14 +1,12 @@
-import { HttpRequest } from "./../../protocols/http";
+import { LoginController } from "./login";
 import { InvalidParamError } from "./../../errors/invalid-param-error";
-import { EmailValidator } from "./../../protocols/email-validator";
 import {
   badRequest,
   serverError,
   unauthorized,
 } from "./../../helpers/http-helpers";
-import { MissingParamError } from "./../../errors/missing-param-error";
-import { LoginController } from "./login";
-import { Authentication } from "../../../domain/usecases/authentication";
+import { MissingParamError } from "./../../errors";
+import { Authentication, EmailValidator, HttpRequest } from "./login-protocols";
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {

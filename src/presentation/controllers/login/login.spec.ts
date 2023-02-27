@@ -2,6 +2,7 @@ import { LoginController } from "./login";
 import { InvalidParamError } from "./../../errors/invalid-param-error";
 import {
   badRequest,
+  ok,
   serverError,
   unauthorized,
 } from "./../../helpers/http-helpers";
@@ -117,5 +118,11 @@ describe("Login Controller", () => {
       .mockReturnValueOnce(new Promise((resolve) => resolve(null)));
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(unauthorized());
+  });
+
+  test("should return 200 if valid credentials are provided", async () => {
+    const { sut } = makeSut();
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(ok({ accessToken: "any_token" }));
   });
 });

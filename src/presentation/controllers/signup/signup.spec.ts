@@ -7,7 +7,7 @@ import {
 } from "./signup-protocols";
 import { SignUpController } from "./signup";
 import { MissingParamError, ServerError } from "../../errors";
-import { badRequest, ok, serverError } from "../../helpers/http-helpers";
+import { badRequest, ok, serverError } from "../../helpers/http/http-helpers";
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {

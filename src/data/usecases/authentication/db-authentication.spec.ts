@@ -55,10 +55,10 @@ describe("DBAuthentication UseCase", () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut();
     jest
       .spyOn(loadAccountByEmailRepositoryStub, "load")
-      .mockRejectedValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
+      .mockImplementationOnce(
+        () => new Promise((resolve, reject) => reject(new Error()))
       );
-    const promise = await sut.auth(makeFakeAuthentication());
+    const promise = sut.auth(makeFakeAuthentication());
     expect(promise).rejects.toThrow();
   });
 });

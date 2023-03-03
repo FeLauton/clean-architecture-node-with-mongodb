@@ -20,6 +20,6 @@ export class AccountMongoRepository
     const account = await accountCollection.findOne({
       email,
     });
-    return MongoHelper.mongoIdMap(account);
+    return account && MongoHelper.mongoIdMap(account);
   }
 }

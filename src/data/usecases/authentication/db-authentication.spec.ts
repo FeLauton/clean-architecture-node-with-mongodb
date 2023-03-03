@@ -1,3 +1,4 @@
+import { HashComparer } from "src/data/protocols/criptography/hash-compare";
 import { LoadAccountByEmailRepository } from "src/data/protocols/db/load-account-by-email-repository";
 import {
   Authentication,
@@ -15,7 +16,7 @@ const makeAccount = (): AccountModel => ({
   email: "any_email@mail.com",
   id: "any_id",
   name: "any_name",
-  password: "any_password",
+  password: "hashed_password",
 });
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
@@ -29,17 +30,32 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   return new LoadAccountByEmailRepositoryStub();
 };
 
+const makeHashComparer = (): HashComparer => {
+  class hashComparerStub implements HashComparer {
+    async compare(value: string, hash: string): Promise<boolean> {
+      return new Promise((resolve) => resolve(true));
+    }
+  }
+  return new hashComparerStub();
+};
+
 interface SutTypes {
   sut: Authentication;
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository;
+  hashComparerStub: HashComparer;
 }
 
 const makeSut = (): SutTypes => {
+  const hashComparerStub = makeHashComparer();
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository();
-  const sut = new DbAuthentication(loadAccountByEmailRepositoryStub);
+  const sut = new DbAuthentication(
+    loadAccountByEmailRepositoryStub,
+    hashComparerStub
+  );
   return {
     sut,
     loadAccountByEmailRepositoryStub,
+    hashComparerStub,
   };
 };
 
@@ -67,5 +83,12 @@ describe("DBAuthentication UseCase", () => {
     jest.spyOn(loadAccountByEmailRepositoryStub, "load").mockReturnValue(null);
     const accessToken = await sut.auth(makeFakeAuthentication());
     expect(accessToken).toBe(null);
+  });
+
+  test("Should call null HashComparer with correct password", async () => {
+    const { sut, hashComparerStub } = makeSut();
+    const compareSpy = jest.spyOn(hashComparerStub, "compare");
+    await sut.auth(makeFakeAuthentication());
+    expect(compareSpy).toHaveBeenCalledWith("any_password", "hashed_password");
   });
 });

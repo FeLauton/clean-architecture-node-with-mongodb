@@ -1,0 +1,24 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo-container
+    image: mongo:3
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+  api:
+    container_name: api-container
+    image: node:14
+    working_dir: /usr/src/clean-node
+    restart: always
+    command: bash -c "npm install --omit=dev && npm run debug"
+    volumes:
+      - ./dist/:/usr/src/clean-node/dist/
+      - ./package.json:/usr/src/clean-node/package.json
+    ports:
+      - "5050:5050"
+      - "9222:9222"
+    links:
+      - mongo

@@ -1,7 +1,7 @@
 import { HashComparer } from "src/data/protocols/criptography/hash-compare";
 import { Encrypter } from "src/data/protocols/criptography/encrypter";
-import { LoadAccountByEmailRepository } from "src/data/protocols/db/load-account-by-email-repository";
-import { UpdateAccessTokenRepository } from "src/data/protocols/db/update-access-token-repository";
+import { LoadAccountByEmailRepository } from "src/data/protocols/db/account/load-account-by-email-repository";
+import { UpdateAccessTokenRepository } from "src/data/protocols/db/account/update-access-token-repository";
 import {
   Authentication,
   AuthenticationModel,

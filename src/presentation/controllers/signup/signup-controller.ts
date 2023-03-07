@@ -1,4 +1,3 @@
-import { AuthenticationModel } from "./../../../domain/usecases/authentication";
 import { badRequest, ok, serverError } from "../../helpers/http/http-helpers";
 import {
   Controller,
@@ -22,11 +21,12 @@ export class SignUpController implements Controller {
         return badRequest(error);
       }
       const { name, email, password } = httpRequest.body;
-      await this.addAccount.add({
+      const account = await this.addAccount.add({
         name,
         email,
         password,
       });
+
       const accessToken = await this.authentication.auth({ email, password });
       return ok({ accessToken });
     } catch (error) {

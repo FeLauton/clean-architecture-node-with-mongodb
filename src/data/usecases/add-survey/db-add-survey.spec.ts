@@ -35,7 +35,7 @@ const makeSut = (): SutTypes => {
 };
 
 describe("DbAddSurvey Usecase", () => {
-  test("Should call Hasher with correct password", async () => {
+  test("Should call AddSurveyRepository with correct values", async () => {
     const { sut, addAccountRepositoryStub } = makeSut();
     const addSpy = jest.spyOn(addAccountRepositoryStub, "add");
     const surveyData = makeFakeSurveyData();

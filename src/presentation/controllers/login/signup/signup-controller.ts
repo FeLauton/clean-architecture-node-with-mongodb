@@ -1,6 +1,10 @@
-import { forbidden } from "./../../helpers/http/http-helpers";
-import { EmailInUseError } from "./../../errors/email-in-use-error";
-import { badRequest, ok, serverError } from "../../helpers/http/http-helpers";
+import { forbidden } from "../../../helpers/http/http-helpers";
+import { EmailInUseError } from "../../../errors/email-in-use-error";
+import {
+  badRequest,
+  ok,
+  serverError,
+} from "../../../helpers/http/http-helpers";
 import {
   Controller,
   HttpRequest,

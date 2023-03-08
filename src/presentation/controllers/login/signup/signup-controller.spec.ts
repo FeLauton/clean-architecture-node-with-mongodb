@@ -1,4 +1,4 @@
-import { forbidden } from "./../../helpers/http/http-helpers";
+import { forbidden } from "../../../helpers/http/http-helpers";
 import {
   AddAccount,
   AddAccountModel,
@@ -8,8 +8,16 @@ import {
   Validation,
 } from "./signup-controller-protocols";
 import { SignUpController } from "./signup-controller";
-import { EmailInUseError, MissingParamError, ServerError } from "../../errors";
-import { badRequest, ok, serverError } from "../../helpers/http/http-helpers";
+import {
+  EmailInUseError,
+  MissingParamError,
+  ServerError,
+} from "../../../errors";
+import {
+  badRequest,
+  ok,
+  serverError,
+} from "../../../helpers/http/http-helpers";
 import { AuthenticationModel } from "../login/login-controller-protocols";
 
 const makeFakeRequest = (): HttpRequest => ({

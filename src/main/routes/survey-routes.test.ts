@@ -22,7 +22,7 @@ describe("Survey Routes", () => {
   describe("POST /survey", () => {
     test("Should return 204 on survey", async () => {
       await request(app)
-        .post("/api/survey")
+        .post("/api/surveys")
         .send({
           question: "Question 1 ",
           answers: [

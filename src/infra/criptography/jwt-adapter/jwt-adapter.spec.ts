@@ -47,18 +47,18 @@ describe("Jwt Adapter", () => {
       expect(verifySpy).toHaveBeenCalledWith("any_token", "secret");
     });
 
-    // test("Should return a token on decrypt success", async () => {
-    //   const sut = makeSut();
-    //   const accessToken = await sut.decrypt("any_token");
-    //   expect(accessToken).toBe("any_id");
-    // });
+    test("Should return a value on verify success", async () => {
+      const sut = makeSut();
+      const accessToken = await sut.decrypt("any_token");
+      expect(accessToken).toBe("any_value");
+    });
 
-    // test("Should throw if decrypt throws", async () => {
+    // test("Should throw if verify throws", async () => {
     //   const sut = makeSut();
     //   jest.spyOn(jwt, "verify").mockImplementationOnce(() => {
     //     throw new Error();
     //   });
-    //   const promise = sut.decrypt("any_value");
+    //   const promise = sut.decrypt("any_token");
     //   await expect(promise).rejects.toThrow();
     // });
   });

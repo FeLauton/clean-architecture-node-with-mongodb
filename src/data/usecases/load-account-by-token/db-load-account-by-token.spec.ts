@@ -18,8 +18,8 @@ const makeAccount = (): AccountModel => ({
 
 const makeDecrypter = (): Decrypter => {
   class DecrypterStub implements Decrypter {
-    decrypt(value: string): Promise<string> {
-      return new Promise((resolve) => resolve("any_token"));
+    async decrypt(value: string): Promise<string> {
+      return new Promise((resolve) => resolve("any_value"));
     }
   }
   return new DecrypterStub();
@@ -60,9 +60,8 @@ describe("DbLoadAccountByToken UseCase", () => {
   test("Should calls Decrypter with correct values", async () => {
     const { sut, decrypterStub } = makeSut();
     const loadAccountByEmailSpy = jest.spyOn(decrypterStub, "decrypt");
-    const { accessToken, role } = makeFakeAuthentication();
-    await sut.load(accessToken);
-    expect(loadAccountByEmailSpy).toHaveBeenCalledWith(accessToken);
+    await sut.load("any_value");
+    expect(loadAccountByEmailSpy).toHaveBeenCalledWith("any_value");
   });
 
   // test("Should calls loadAccountByTokenRepository with correct values", async () => {

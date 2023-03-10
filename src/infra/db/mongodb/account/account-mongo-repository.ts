@@ -46,7 +46,14 @@ export class AccountMongoRepository
     const accountCollection = MongoHelper.getCollection("accounts");
     const account = await accountCollection.findOne({
       accessToken: token,
-      role,
+      $or: [
+        {
+          role,
+        },
+        {
+          role: "admin",
+        },
+      ],
     });
     return account && MongoHelper.mongoIdMap(account);
   }

@@ -46,8 +46,8 @@ const makeSut = (): SutTypes => {
   const loadAccountByTokenRepositoryStub = makeLoadAccountByTokenRepository();
   const decrypterStub = makeDecrypter();
   const sut = new DbLoadAccountByToken(
-    loadAccountByTokenRepositoryStub,
-    decrypterStub
+    decrypterStub,
+    loadAccountByTokenRepositoryStub
   );
   return {
     sut,

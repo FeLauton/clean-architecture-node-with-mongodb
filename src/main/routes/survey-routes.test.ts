@@ -9,6 +9,26 @@ import app from "../config/app";
 let surveyCollection: Collection;
 let accountCollection: Collection;
 
+const makeAccessToken = async (): Promise<string> => {
+  const hashedPassword = await hash("123", 12);
+  const { insertedId } = await accountCollection.insertOne({
+    name: "Fellipe",
+    email: "fellipe.lauton@gmail.com",
+    password: hashedPassword,
+    role: "admin",
+  });
+  const accessToken = sign({ id: insertedId.toHexString() }, env.jwtSecret);
+  await accountCollection.updateOne(
+    { _id: insertedId },
+    {
+      $set: {
+        accessToken,
+      },
+    }
+  );
+  return accessToken;
+};
+
 describe("Survey Routes", () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL);
@@ -44,22 +64,7 @@ describe("Survey Routes", () => {
     });
 
     test("Should return 204 on add survey with accessToken", async () => {
-      const hashedPassword = await hash("123", 12);
-      const { insertedId } = await accountCollection.insertOne({
-        name: "Fellipe",
-        email: "fellipe.lauton@gmail.com",
-        password: hashedPassword,
-        role: "admin",
-      });
-      const accessToken = sign({ id: insertedId.toHexString() }, env.jwtSecret);
-      await accountCollection.updateOne(
-        { _id: insertedId },
-        {
-          $set: {
-            accessToken,
-          },
-        }
-      );
+      const accessToken = await makeAccessToken();
       await request(app)
         .post("/api/surveys")
         .set("x-access-token", accessToken)
@@ -84,33 +89,12 @@ describe("Survey Routes", () => {
       await request(app).get("/api/surveys").send().expect(403);
     });
 
-    test("Should return 200 on load surveys with accessToken", async () => {
-      const hashedPassword = await hash("123", 12);
-      const { insertedId } = await accountCollection.insertOne({
-        name: "Fellipe",
-        email: "fellipe.lauton@gmail.com",
-        password: hashedPassword,
-      });
-      const accessToken = sign({ id: insertedId.toHexString() }, env.jwtSecret);
-      await accountCollection.updateOne(
-        { _id: insertedId },
-        {
-          $set: {
-            accessToken,
-          },
-        }
-      );
-      await surveyCollection.insertMany([
-        {
-          question: "any_question",
-          answers: [{ image: "any_image", answer: "any_answer" }],
-          date: new Date(),
-        },
-      ]);
+    test("Should return 204 on load surveys with a valid accessToken", async () => {
+      const accessToken = await makeAccessToken();
       await request(app)
         .get("/api/surveys")
         .set("x-access-token", accessToken)
-        .expect(200);
+        .expect(204);
     });
   });
 });

@@ -1,7 +1,7 @@
 import {
   ok,
-  badRequest,
   serverError,
+  noContent,
 } from "./../../../helpers/http/http-helpers";
 import {
   Controller,
@@ -15,7 +15,7 @@ export class LoadSurveyController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const surveys = await this.loadSurveys.load();
-      return ok(surveys);
+      return surveys.length ? ok(surveys) : noContent();
     } catch (error) {
       return serverError(error);
     }

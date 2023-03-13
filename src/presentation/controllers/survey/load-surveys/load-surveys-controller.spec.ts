@@ -3,7 +3,7 @@ import {
   ok,
   serverError,
 } from "./../../../helpers/http/http-helpers";
-import { LoadSurveyController } from "./load-surveys-controller";
+import { LoadSurveysController } from "./load-surveys-controller";
 import { SurveyModel } from "../../../../domain/models/survey";
 import { LoadSurveys } from "./load-surveys-controller-protocols";
 import MockDate from "mockdate";
@@ -45,13 +45,13 @@ const makeLoadSurveys = (): LoadSurveys => {
 };
 
 interface SutTypes {
-  sut: LoadSurveyController;
+  sut: LoadSurveysController;
   loadSurveyStub: LoadSurveys;
 }
 
 const makeSut = (): SutTypes => {
   const loadSurveyStub = makeLoadSurveys();
-  const sut = new LoadSurveyController(loadSurveyStub);
+  const sut = new LoadSurveysController(loadSurveyStub);
   return {
     sut,
     loadSurveyStub,

@@ -1,8 +1,8 @@
-import { Decrypter } from "./../../protocols/criptography/encrypter copy";
-import { LoadAccountByTokenRepository } from "./../../protocols/db/account/load-account-by-token-repository";
-import { LoadAccountByToken } from "./../../../domain/usecases/load-account-by-token";
-import { AccountModel } from "./../../../domain/models/account";
+import { Decrypter } from "../../../protocols/criptography/encrypter copy";
+import { LoadAccountByTokenRepository } from "../../../protocols/db/account/load-account-by-token-repository";
+import { AccountModel } from "../../../../domain/models/account";
 import { DbLoadAccountByToken } from "./db-load-account-by-token";
+import { LoadAccountByToken } from "../../../../domain/usecases/account/load-account-by-token";
 
 const makeFakeAuthentication = () => ({
   accessToken: "any_token",

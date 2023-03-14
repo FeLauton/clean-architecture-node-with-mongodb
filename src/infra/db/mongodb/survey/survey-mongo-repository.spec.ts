@@ -4,6 +4,10 @@ import { SurveyMongoRepository } from "./survey-mongo-repository";
 
 let surveyCollection: Collection;
 
+const makeSut = (): SurveyMongoRepository => {
+  return new SurveyMongoRepository();
+};
+
 describe("Survey Mongo Repository", () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL);
@@ -12,14 +16,9 @@ describe("Survey Mongo Repository", () => {
     surveyCollection = await MongoHelper.getCollection("surveys");
     await surveyCollection.deleteMany({});
   });
-
   afterAll(async () => {
     await MongoHelper.disconnect();
   });
-
-  const makeSut = (): SurveyMongoRepository => {
-    return new SurveyMongoRepository();
-  };
 
   describe("add()", () => {
     test("Should return an 204 on add success", async () => {

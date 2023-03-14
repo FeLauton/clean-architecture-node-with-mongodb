@@ -24,6 +24,7 @@ const makeSurveyResultId = async (): Promise<string> => {
   });
   return insertedSurveyResult.insertedId.toHexString();
 };
+
 const makeAccountId = async (): Promise<string> => {
   const insertedAccount = await accountCollection.insertOne({
     name: "any_name",

@@ -1,3 +1,5 @@
+import { InvalidParamError } from "./../../../errors/invalid-param-error";
+import { forbidden, serverError } from "./../../../helpers/http/http-helpers";
 import {
   HttpRequest,
   HttpResponse,
@@ -12,8 +14,17 @@ export class SaveSurveyResultController implements Controller {
     private readonly saveSurveyResult: SaveSurveyResult
   ) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    this.loadSurveyById.loadById(httpRequest.params.surveyId);
-    this.saveSurveyResult.save(httpRequest.body);
-    return;
+    try {
+      this.saveSurveyResult.save(httpRequest.body);
+      const survey = await this.loadSurveyById.loadById(
+        httpRequest.params.surveyId
+      );
+      if (!survey) {
+        return forbidden(new InvalidParamError("surveyId"));
+      }
+      return null;
+    } catch (error) {
+      return serverError(error);
+    }
   }
 }

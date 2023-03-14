@@ -104,6 +104,14 @@ describe("SaveSurveyResultController", () => {
     expect(httpResponse).toEqual(forbidden(new InvalidParamError("surveyId")));
   });
 
+  test("Should return 403 if an invalid answer is provided", async () => {
+    const { sut } = makeSut();
+    const fakeRequest = makeFakeRequest();
+    fakeRequest.body.answer = "wrong_answer";
+    const httpResponse = await sut.handle(fakeRequest);
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError("answer")));
+  });
+
   test("Should return 500 if LoadSurveyById throws", async () => {
     const { sut, loadSurveyByIdStub } = makeSut();
     jest

@@ -67,4 +67,10 @@ describe("DbSaveSurveyResult", () => {
     const promise = sut.save(makeFakeSurveyResultData());
     expect(promise).rejects.toThrow();
   });
+
+  test("Should return survey result on success", async () => {
+    const { sut } = makeSut();
+    const surveyResult = await sut.save(makeFakeSurveyResultData());
+    expect(surveyResult).toEqual(makeFakeSurveyResult());
+  });
 });

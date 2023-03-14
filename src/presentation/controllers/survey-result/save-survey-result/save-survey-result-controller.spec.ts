@@ -4,8 +4,22 @@ import {
   SaveSurveyResult,
   SaveSurveyResultModel,
   SurveyResultModel,
+  SurveyModel,
+  LoadSurveyById,
 } from "./save-survey-result-controller-protocols";
 import MockDate from "mockdate";
+
+const makeFakeSurvey = (): SurveyModel => ({
+  id: "any_id",
+  question: "any_question",
+  answers: [
+    {
+      image: "any_image",
+      answer: "any_answer",
+    },
+  ],
+  date: new Date(),
+});
 
 const makeFakeSurveyResult = (): SurveyResultModel => ({
   id: "any_id",
@@ -21,6 +35,7 @@ const makeFakeSurveyResultData = (): SaveSurveyResultModel => {
 };
 
 const makeFakeRequest = (): HttpRequest => ({
+  params: { surveyId: "any_survey_id" },
   body: makeFakeSurveyResultData(),
 });
 
@@ -33,16 +48,31 @@ const makeSaveSurveyResult = (): SaveSurveyResult => {
   return new SaveSurveyResultStub();
 };
 
+const makeLoadSurveyById = (): LoadSurveyById => {
+  class LoadSurveyByIdStub implements LoadSurveyById {
+    async loadById(id: string): Promise<SurveyModel> {
+      return new Promise((resolve) => resolve(makeFakeSurvey()));
+    }
+  }
+  return new LoadSurveyByIdStub();
+};
+
 interface SutTypes {
   sut: SaveSurveyResultController;
   saveSurveyResultStub: SaveSurveyResult;
+  loadSurveyByIdStub: LoadSurveyById;
 }
 
 const makeSut = (): SutTypes => {
+  const loadSurveyByIdStub = makeLoadSurveyById();
   const saveSurveyResultStub = makeSaveSurveyResult();
-  const sut = new SaveSurveyResultController(saveSurveyResultStub);
+  const sut = new SaveSurveyResultController(
+    loadSurveyByIdStub,
+    saveSurveyResultStub
+  );
   return {
     sut,
+    loadSurveyByIdStub,
     saveSurveyResultStub,
   };
 };
@@ -53,6 +83,14 @@ describe("SaveSurveyResultController", () => {
   });
   afterAll(() => {
     MockDate.reset();
+  });
+
+  test("Should calls LoadSurveyById with correct values", async () => {
+    const { sut, loadSurveyByIdStub } = makeSut();
+    const loadByIdSpy = jest.spyOn(loadSurveyByIdStub, "loadById");
+    const httpRequest = makeFakeRequest();
+    await sut.handle(httpRequest);
+    expect(loadByIdSpy).toHaveBeenCalledWith("any_survey_id");
   });
 
   test("Should calls SaveSurveyResult with correct values", async () => {

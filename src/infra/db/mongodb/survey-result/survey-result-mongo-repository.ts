@@ -7,16 +7,17 @@ export class SaveSurveyResultMongoRepository
   implements SaveSurveyResultRepository
 {
   async save(surveyData: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    const { accountId, answer, date, surveyId } = surveyData;
     const surveyResultCollection = MongoHelper.getCollection("surveyResults");
     const surveyResult = await surveyResultCollection.findOneAndUpdate(
       {
-        surveyId: surveyData.surveyId,
-        accountId: surveyData.accountId,
+        surveyId,
+        accountId,
       },
       {
         $set: {
-          answer: surveyData.answer,
-          date: surveyData.date,
+          answer,
+          date,
         },
       },
       { upsert: true, returnDocument: "after" }

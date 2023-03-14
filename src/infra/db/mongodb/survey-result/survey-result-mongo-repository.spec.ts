@@ -16,10 +16,11 @@ const makeSurveyId = async (): Promise<string> => {
   return insertedSurvey.insertedId.toHexString();
 };
 
-const makeSurveyResultId = async (): Promise<string> => {
+const makeSurveyResultId = async ({ surveyId, accountId }): Promise<string> => {
   const insertedSurveyResult = await surveyResultCollection.insertOne({
+    accountId,
     answer: "any_answer",
-    surveyId: "any_survey_id",
+    surveyId,
     date: new Date(),
   });
   return insertedSurveyResult.insertedId.toHexString();
@@ -44,8 +45,8 @@ describe("SurveyResultMongoRepository", () => {
   });
   beforeEach(async () => {
     surveyCollection = await MongoHelper.getCollection("surveys");
-    surveyResultCollection = await MongoHelper.getCollection("surveyResults");
     accountCollection = await MongoHelper.getCollection("accounts");
+    surveyResultCollection = await MongoHelper.getCollection("surveyResults");
     await surveyCollection.deleteMany({});
     await surveyResultCollection.deleteMany({});
     await accountCollection.deleteMany({});
@@ -68,6 +69,22 @@ describe("SurveyResultMongoRepository", () => {
       expect(surveyResult).toBeTruthy();
       expect(surveyResult.id).toBeTruthy();
       expect(surveyResult.answer).toBe("any_answer");
+    });
+
+    test("Should add a survey result if its not new", async () => {
+      const accountId = await makeAccountId();
+      const surveyId = await makeSurveyId();
+      const surveyResultId = await makeSurveyResultId({ accountId, surveyId });
+      const sut = makeSut();
+      const surveyResult = await sut.save({
+        accountId,
+        answer: "renew_any_answer",
+        surveyId,
+        date: new Date(),
+      });
+      expect(surveyResult).toBeTruthy();
+      expect(surveyResult.id).toEqual(surveyResultId);
+      expect(surveyResult.answer).toBe("renew_any_answer");
     });
   });
 });

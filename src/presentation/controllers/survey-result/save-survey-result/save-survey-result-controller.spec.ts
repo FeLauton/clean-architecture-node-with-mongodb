@@ -1,6 +1,10 @@
 import { ServerError } from "./../../../errors/server-error";
 import { InvalidParamError } from "./../../../errors/invalid-param-error";
-import { forbidden, serverError } from "./../../../helpers/http/http-helpers";
+import {
+  forbidden,
+  ok,
+  serverError,
+} from "./../../../helpers/http/http-helpers";
 import { SaveSurveyResultController } from "./save-survey-result-controller";
 import {
   HttpRequest,
@@ -132,23 +136,6 @@ describe("SaveSurveyResultController", () => {
     expect(saveSpy).toHaveBeenCalledWith(makeFakeSurveyResultData());
   });
 
-  // test("Should return 403 if LoadSurveyById returns null", async () => {
-  //   const { sut, saveSurveyResultStub } = makeSut();
-  //   jest
-  //     .spyOn(saveSurveyResultStub, "save")
-  //     .mockReturnValueOnce(new Promise((resolve) => resolve(null)));
-  //   const httpResponse = await sut.handle(makeFakeRequest());
-  //   expect(httpResponse).toEqual(forbidden(new InvalidParamError("surveyId")));
-  // });
-
-  // test("Should return 403 if an invalid answer is provided", async () => {
-  //   const { sut } = makeSut();
-  //   const fakeRequest = makeFakeRequest();
-  //   fakeRequest.body.answer = "wrong_answer";
-  //   const httpResponse = await sut.handle(fakeRequest);
-  //   expect(httpResponse).toEqual(forbidden(new InvalidParamError("answer")));
-  // });
-
   test("Should return 500 if SaveSurveyResult throws", async () => {
     const { sut, saveSurveyResultStub } = makeSut();
     jest
@@ -158,5 +145,11 @@ describe("SaveSurveyResultController", () => {
       );
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(serverError(new Error()));
+  });
+
+  test("Should return 200 on SaveSurveyResult success", async () => {
+    const { sut } = makeSut();
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(ok(makeFakeSurveyResult()));
   });
 });

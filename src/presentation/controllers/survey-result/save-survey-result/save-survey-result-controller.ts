@@ -1,5 +1,9 @@
 import { InvalidParamError } from "./../../../errors/invalid-param-error";
-import { forbidden, serverError } from "./../../../helpers/http/http-helpers";
+import {
+  forbidden,
+  ok,
+  serverError,
+} from "./../../../helpers/http/http-helpers";
 import {
   HttpRequest,
   HttpResponse,
@@ -33,6 +37,7 @@ export class SaveSurveyResultController implements Controller {
         surveyId,
         date: new Date(),
       });
+      return ok(surveyResult);
     } catch (error) {
       return serverError(error);
     }

@@ -20,7 +20,7 @@ export class SaveSurveyResultController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { surveyId } = httpRequest.params;
-      const { answer, date } = httpRequest.body;
+      const { answer } = httpRequest.body;
       const { accountId } = httpRequest;
       const survey = await this.loadSurveyById.loadById(surveyId);
       if (survey) {

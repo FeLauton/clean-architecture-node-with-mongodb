@@ -5,4 +5,6 @@ export interface HttpResponse {
 export interface HttpRequest {
   headers?: any;
   body?: any;
+  params?: any;
+  accountId?: string;
 }

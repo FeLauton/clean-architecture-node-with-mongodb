@@ -4,7 +4,11 @@ import { SurveyMongoRepository } from "./survey-mongo-repository";
 
 let surveyCollection: Collection;
 
-describe("Survey Mongo Repository", () => {
+const makeSut = (): SurveyMongoRepository => {
+  return new SurveyMongoRepository();
+};
+
+describe("SurveyMongoRepository", () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL);
   });
@@ -12,14 +16,9 @@ describe("Survey Mongo Repository", () => {
     surveyCollection = await MongoHelper.getCollection("surveys");
     await surveyCollection.deleteMany({});
   });
-
   afterAll(async () => {
     await MongoHelper.disconnect();
   });
-
-  const makeSut = (): SurveyMongoRepository => {
-    return new SurveyMongoRepository();
-  };
 
   describe("add()", () => {
     test("Should return an 204 on add success", async () => {
@@ -56,6 +55,7 @@ describe("Survey Mongo Repository", () => {
       ]);
       const surveys = await sut.loadAll();
       expect(surveys.length).toBe(2);
+      expect(surveys[0].id).toBeTruthy();
       expect(surveys[0].question).toBe("any_question");
       expect(surveys[1].question).toBe("other_question");
     });
@@ -64,6 +64,20 @@ describe("Survey Mongo Repository", () => {
       const sut = makeSut();
       const surveys = await sut.loadAll();
       expect(surveys.length).toBe(0);
+    });
+  });
+
+  describe("loadById()", () => {
+    test("Should load survey on success", async () => {
+      const sut = makeSut();
+      const insertedSurvey = await surveyCollection.insertOne({
+        question: "any_question",
+        answers: [{ image: "any_image", answer: "any_answer" }],
+        date: new Date(),
+      });
+      const id = insertedSurvey.insertedId.toHexString();
+      const survey = await sut.loadById(id);
+      expect(survey).toBeTruthy();
     });
   });
 });

@@ -3,12 +3,13 @@ import { Collection } from "mongodb";
 import request from "supertest";
 import { MongoHelper } from "../../infra/db/mongodb/helpers/mongo-helpers";
 import app from "../config/app";
+import env from "../config/env";
 
 let accountCollection: Collection;
 
 describe("Login Routes", () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL);
+    await MongoHelper.connect(env.mongoUrl);
   });
 
   beforeEach(async () => {

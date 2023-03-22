@@ -1,43 +1,8 @@
-import { SurveyModel } from "./../../../../domain/models/survey";
-import { LoadSurveyRepository } from "../../../protocols/db/survey/load-survey-repository";
-import { DbLoadSurveys } from "./db-load-surveys";
 import MockDate from "mockdate";
-
-const makeFakeSurveys = (): SurveyModel[] => [
-  {
-    id: "any_id",
-    question: "any_question",
-    answers: [
-      {
-        image: "any_image",
-        answer: "any_answer",
-      },
-    ],
-    date: new Date(),
-  },
-  {
-    id: "other_id",
-    question: "other_question",
-    answers: [
-      {
-        image: "other_image",
-        answer: "other_answer",
-      },
-    ],
-    date: new Date(),
-  },
-];
-
-const makeLoadSurveysRepository = (): LoadSurveyRepository => {
-  class LoadSurveyRepositoryStub implements LoadSurveyRepository {
-    loadAll(): Promise<SurveyModel[]> {
-      return new Promise<SurveyModel[]>((resolve) =>
-        resolve(makeFakeSurveys())
-      );
-    }
-  }
-  return new LoadSurveyRepositoryStub();
-};
+import { LoadSurveyRepository } from "../../../protocols/db/survey/load-survey-repository";
+import { mockLoadSurveysRepository } from "../../../tests";
+import { mockSurveyModels, throwError } from "./../../../../domain/tests";
+import { DbLoadSurveys } from "./db-load-surveys";
 
 interface SutTypes {
   sut: DbLoadSurveys;
@@ -45,7 +10,7 @@ interface SutTypes {
 }
 
 const makeSut = (): SutTypes => {
-  const loadSurveysStub = makeLoadSurveysRepository();
+  const loadSurveysStub = mockLoadSurveysRepository();
   const sut = new DbLoadSurveys(loadSurveysStub);
   return {
     sut,
@@ -70,11 +35,7 @@ describe("DbLoadSurveys UseCase", () => {
 
   test("Should throw if loadSurveys throws", async () => {
     const { sut, loadSurveysStub } = makeSut();
-    jest
-      .spyOn(loadSurveysStub, "loadAll")
-      .mockImplementationOnce(
-        () => new Promise((resolve, reject) => reject(new Error()))
-      );
+    jest.spyOn(loadSurveysStub, "loadAll").mockImplementationOnce(throwError);
     const promise = sut.load();
     expect(promise).rejects.toThrow();
   });
@@ -82,6 +43,6 @@ describe("DbLoadSurveys UseCase", () => {
   test("Should DbLoadSurveys a list of surveys on success", async () => {
     const { sut } = makeSut();
     const surveys = await sut.load();
-    expect(surveys).toEqual(makeFakeSurveys());
+    expect(surveys).toEqual(mockSurveyModels());
   });
 });

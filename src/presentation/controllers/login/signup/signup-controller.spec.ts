@@ -1,7 +1,7 @@
 import { forbidden } from "../../../helpers/http/http-helpers";
 import {
   AddAccount,
-  AddAccountModel,
+  AddAccountParams,
   AccountModel,
   Authentication,
   HttpRequest,
@@ -18,7 +18,7 @@ import {
   ok,
   serverError,
 } from "../../../helpers/http/http-helpers";
-import { AuthenticationModel } from "../login/login-controller-protocols";
+import { AuthenticationParams } from "../login/login-controller-protocols";
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
@@ -38,7 +38,7 @@ const makeFakeAccount = (): AccountModel => ({
 
 const makeAuthentication = () => {
   class AuthenticationStub implements Authentication {
-    async auth(authentication: AuthenticationModel): Promise<string> {
+    async auth(authentication: AuthenticationParams): Promise<string> {
       return "any_token";
     }
   }
@@ -47,7 +47,7 @@ const makeAuthentication = () => {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add(account: AddAccountModel): Promise<AccountModel> {
+    async add(account: AddAccountParams): Promise<AccountModel> {
       return new Promise((resolve) => resolve(makeFakeAccount()));
     }
   }

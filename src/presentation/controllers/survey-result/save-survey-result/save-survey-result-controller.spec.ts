@@ -8,7 +8,7 @@ import { SaveSurveyResultController } from "./save-survey-result-controller";
 import {
   HttpRequest,
   SaveSurveyResult,
-  SaveSurveyResultModel,
+  SaveSurveyResultParams,
   SurveyResultModel,
   SurveyModel,
   LoadSurveyById,
@@ -35,7 +35,7 @@ const makeFakeSurveyResult = (): SurveyResultModel => ({
   date: new Date(),
 });
 
-const makeFakeSurveyResultData = (): SaveSurveyResultModel => {
+const makeFakeSurveyResultData = (): SaveSurveyResultParams => {
   const { id, ...rest } = makeFakeSurveyResult();
   return rest;
 };
@@ -48,7 +48,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeSaveSurveyResult = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
-    async save(data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    async save(data: SaveSurveyResultParams): Promise<SurveyResultModel> {
       return new Promise((resolve) => resolve(makeFakeSurveyResult()));
     }
   }

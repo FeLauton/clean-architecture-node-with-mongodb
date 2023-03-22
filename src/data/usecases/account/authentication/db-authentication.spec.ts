@@ -7,10 +7,10 @@ import { AccountModel } from "../add-account/db-add-account-protocols";
 import { DbAuthentication } from "./db-authentication";
 import {
   Authentication,
-  AuthenticationModel,
+  AuthenticationParams,
 } from "../../../../domain/usecases/account/authentication";
 
-const makeFakeAuthentication = (): AuthenticationModel => ({
+const makeFakeAuthentication = (): AuthenticationParams => ({
   email: "any_email@mail.com",
   password: "any_password",
 });

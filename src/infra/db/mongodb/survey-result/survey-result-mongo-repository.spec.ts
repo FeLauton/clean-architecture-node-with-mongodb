@@ -1,6 +1,7 @@
 import { Collection } from "mongodb";
-import { SurveyModel } from "../../../../domain/models/survey";
+import env from "../../../../main/config/env";
 import { MongoHelper } from "../helpers/mongo-helpers";
+import { mockAddAccountParams } from "./../../../../domain/tests/mock-account";
 import { SaveSurveyResultMongoRepository } from "./survey-result-mongo-repository";
 
 let surveyCollection: Collection;
@@ -27,11 +28,9 @@ const makeSurveyResultId = async ({ surveyId, accountId }): Promise<string> => {
 };
 
 const makeAccountId = async (): Promise<string> => {
-  const insertedAccount = await accountCollection.insertOne({
-    name: "any_name",
-    email: "any_email@mail.com",
-    password: "any_password",
-  });
+  const insertedAccount = await accountCollection.insertOne(
+    mockAddAccountParams()
+  );
   return insertedAccount.insertedId.toHexString();
 };
 
@@ -41,7 +40,7 @@ const makeSut = (): SaveSurveyResultMongoRepository => {
 
 describe("SurveyResultMongoRepository", () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL);
+    await MongoHelper.connect(env.mongoUrl);
   });
   beforeEach(async () => {
     surveyCollection = await MongoHelper.getCollection("surveys");

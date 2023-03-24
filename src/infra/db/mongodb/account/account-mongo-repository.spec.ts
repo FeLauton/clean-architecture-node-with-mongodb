@@ -1,7 +1,8 @@
-import { Collection } from "mongodb";
+import { Collection, ObjectId } from "mongodb";
+import env from "../../../../main/config/env";
 import { MongoHelper } from "../helpers/mongo-helpers";
+import { mockAddAccountParams } from "./../../../../domain/tests/mock-account";
 import { AccountMongoRepository } from "./account-mongo-repository";
-import { ObjectId } from "mongodb";
 
 let accountCollection: Collection;
 
@@ -10,9 +11,7 @@ const makeAccountId = async (
   role?: string
 ): Promise<string> => {
   const insertedAccount = await accountCollection.insertOne({
-    name: "any_name",
-    email: "any_email@mail.com",
-    password: "any_password",
+    ...mockAddAccountParams(),
     accessToken,
     role,
   });
@@ -31,7 +30,7 @@ const makeSut = (): AccountMongoRepository => {
 
 describe("Account Mongo Repository", () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL);
+    await MongoHelper.connect(env.mongoUrl);
   });
   beforeEach(async () => {
     accountCollection = await MongoHelper.getCollection("accounts");
@@ -45,11 +44,7 @@ describe("Account Mongo Repository", () => {
   describe("add()", () => {
     test("Should return an account on add success", async () => {
       const sut = makeSut();
-      const account = await sut.add({
-        name: "any_name",
-        email: "any_email@mail.com",
-        password: "any_password",
-      });
+      const account = await sut.add(mockAddAccountParams());
       expect(account).toBeTruthy();
       expect(account.id).toBeTruthy();
       expect(account.name).toBe("any_name");

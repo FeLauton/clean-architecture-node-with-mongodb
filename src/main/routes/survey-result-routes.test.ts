@@ -1,10 +1,10 @@
 import { hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { Collection } from "mongodb";
-import env from "../config/env";
 import request from "supertest";
 import { MongoHelper } from "../../infra/db/mongodb/helpers/mongo-helpers";
 import app from "../config/app";
+import env from "../config/env";
 
 let surveyCollection: Collection;
 let accountCollection: Collection;
@@ -48,7 +48,7 @@ const makeFakeSurvey = async (): Promise<string> => {
 
 describe("Survey Routes", () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL);
+    await MongoHelper.connect(env.mongoUrl);
   });
 
   beforeEach(async () => {

@@ -87,7 +87,7 @@ describe("DBAuthentication UseCase", () => {
     const { sut, hashComparerStub } = makeSut();
     jest
       .spyOn(hashComparerStub, "compare")
-      .mockReturnValue(new Promise((resolve) => resolve(false)));
+      .mockReturnValue(Promise.resolve(false));
     const accessToken = await sut.auth(mockAuthenticationParams());
     expect(accessToken).toBe(null);
   });

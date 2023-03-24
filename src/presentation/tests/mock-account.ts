@@ -22,7 +22,7 @@ export const mockAuthentication = () => {
 export const mockAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add(account: AddAccountParams): Promise<AccountModel> {
-      return new Promise((resolve) => resolve(mockAccountModel()));
+      return Promise.resolve(mockAccountModel());
     }
   }
   return new AddAccountStub();
@@ -34,9 +34,7 @@ export const mockLoadAccountByToken = (): LoadAccountByToken => {
       accessToken: string,
       role?: string | undefined
     ): Promise<AccountModel> {
-      return new Promise<AccountModel>((resolve) =>
-        resolve(mockAccountModel())
-      );
+      return Promise.resolve(mockAccountModel());
     }
   }
   return new LoadAccountByTokenStub();

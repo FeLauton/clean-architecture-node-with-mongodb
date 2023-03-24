@@ -1,37 +1,24 @@
-import { Collection } from "mongodb";
+import { Collection, ObjectId } from "mongodb";
+import { SurveyModel } from "../../../../domain/models/survey";
 import env from "../../../../main/config/env";
 import { MongoHelper } from "../helpers/mongo-helpers";
 import { mockAddAccountParams } from "./../../../../domain/tests/mock-account";
+import { mockAddSurveyParams } from "./../../../../domain/tests/mock-survey";
 import { SaveSurveyResultMongoRepository } from "./survey-result-mongo-repository";
 
 let surveyCollection: Collection;
 let surveyResultCollection: Collection;
 let accountCollection: Collection;
 
-const makeSurveyId = async (): Promise<string> => {
-  const insertedSurvey = await surveyCollection.insertOne({
-    question: "any_question",
-    answers: [{ image: "any_image", answer: "any_answer" }],
-    date: new Date(),
-  });
-  return insertedSurvey.insertedId.toHexString();
+const mockSurvey = async (): Promise<SurveyModel> => {
+  const res = await surveyCollection.insertOne(mockAddSurveyParams());
+  const survey = await surveyCollection.findOne({ _id: res.insertedId });
+  return MongoHelper.mongoIdMap(survey);
 };
 
-const makeSurveyResultId = async ({ surveyId, accountId }): Promise<string> => {
-  const insertedSurveyResult = await surveyResultCollection.insertOne({
-    accountId,
-    answer: "any_answer",
-    surveyId,
-    date: new Date(),
-  });
-  return insertedSurveyResult.insertedId.toHexString();
-};
-
-const makeAccountId = async (): Promise<string> => {
-  const insertedAccount = await accountCollection.insertOne(
-    mockAddAccountParams()
-  );
-  return insertedAccount.insertedId.toHexString();
+const mockAccountId = async (): Promise<string> => {
+  const res = await accountCollection.insertOne(mockAddAccountParams());
+  return res.insertedId.toHexString();
 };
 
 const makeSut = (): SaveSurveyResultMongoRepository => {
@@ -56,34 +43,46 @@ describe("SurveyResultMongoRepository", () => {
 
   describe("save()", () => {
     test("Should add a survey result if its new", async () => {
+      const survey = await mockSurvey();
+      const accountId = await mockAccountId();
       const sut = makeSut();
-      const accountId = await makeAccountId();
-      const surveyId = await makeSurveyId();
-      const surveyResult = await sut.save({
+      await sut.save({
+        surveyId: survey.id,
         accountId,
-        answer: "any_answer",
-        surveyId,
+        answer: survey.answers[0].answer,
         date: new Date(),
       });
+      const surveyResult = await surveyResultCollection.findOne({
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(accountId),
+      });
       expect(surveyResult).toBeTruthy();
-      expect(surveyResult.id).toBeTruthy();
-      expect(surveyResult.answer).toBe("any_answer");
     });
 
-    test("Should add a survey result if its not new", async () => {
-      const accountId = await makeAccountId();
-      const surveyId = await makeSurveyId();
-      const surveyResultId = await makeSurveyResultId({ accountId, surveyId });
-      const sut = makeSut();
-      const surveyResult = await sut.save({
-        accountId,
-        answer: "renew_any_answer",
-        surveyId,
+    test("Should update survey result if its not new", async () => {
+      const survey = await mockSurvey();
+      const accountId = await mockAccountId();
+      await surveyResultCollection.insertOne({
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(accountId),
+        answer: survey.answers[0].answer,
         date: new Date(),
       });
+      const sut = makeSut();
+      await sut.save({
+        surveyId: survey.id,
+        accountId,
+        answer: survey.answers[1].answer,
+        date: new Date(),
+      });
+      const surveyResult = await surveyResultCollection
+        .find({
+          surveyId: new ObjectId(survey.id),
+          accountId: new ObjectId(accountId),
+        })
+        .toArray();
       expect(surveyResult).toBeTruthy();
-      expect(surveyResult.id).toEqual(surveyResultId);
-      expect(surveyResult.answer).toBe("renew_any_answer");
+      expect(surveyResult.length).toBe(1);
     });
   });
 });

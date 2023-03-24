@@ -1,5 +1,5 @@
-import { LoadSurveyResult } from "../../../../domain/usecases/survey-result/load-survey-result";
 import {
+  LoadSurveyResult,
   LoadSurveyResultRepository,
   SurveyResultModel,
 } from "./db-load-survey-result-protocols";
@@ -10,7 +10,9 @@ export class DbLoadSurveyResult implements LoadSurveyResult {
   ) {}
 
   async load(surveyId: string): Promise<SurveyResultModel> {
-    await this.loadSurveyResultRepository.loadBySurveyId(surveyId);
-    return;
+    const surveyResult = await this.loadSurveyResultRepository.loadBySurveyId(
+      surveyId
+    );
+    return surveyResult;
   }
 }

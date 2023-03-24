@@ -1,3 +1,5 @@
+import { throwError } from "../../../../domain/tests";
+import { mockSurveyResultModel } from "./../../../../domain/tests/mock-survey-result";
 import { mockLoadSurveyResultRepository } from "./../../../tests/mock-db-survey-result";
 import { DbLoadSurveyResult } from "./db-load-survey-result";
 import { LoadSurveyResultRepository } from "./db-load-survey-result-protocols";
@@ -27,18 +29,18 @@ describe("DbLoadSurveyResult", () => {
     expect(loadBySurveyIdSpy).toHaveBeenCalledWith("any_survey_id");
   });
 
-  // test("Should throw if LoadSurveyResultRepository throws", async () => {
-  //   const { sut, loadSurveyResultRepositoryStub } = makeSut();
-  //   jest
-  //     .spyOn(loadSurveyResultRepositoryStub, "load")
-  //     .mockImplementationOnce(throwError);
-  //   const promise = sut.load(mockLoadSurveyResultParams());
-  //   expect(promise).rejects.toThrow();
-  // });
+  test("Should throw if LoadSurveyResultRepository throws", async () => {
+    const { sut, loadSurveyResultRepositoryStub } = makeSut();
+    jest
+      .spyOn(loadSurveyResultRepositoryStub, "loadBySurveyId")
+      .mockImplementationOnce(throwError);
+    const promise = sut.load("any_survey_id");
+    expect(promise).rejects.toThrow();
+  });
 
-  // test("Should return survey result on success", async () => {
-  //   const { sut } = makeSut();
-  //   const surveyResult = await sut.load(mockLoadSurveyResultParams());
-  //   expect(surveyResult).toEqual(mockSurveyResultModel());
-  // });
+  test("Should return survey result on success", async () => {
+    const { sut } = makeSut();
+    const surveyResult = await sut.load("any_survey_id");
+    expect(surveyResult).toEqual(mockSurveyResultModel());
+  });
 });

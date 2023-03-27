@@ -1,5 +1,5 @@
 import { LoadAccountByToken } from "../../../../domain/usecases/account/load-account-by-token";
-import { Decrypter } from "../../../protocols/criptography/encrypter copy";
+import { Decrypter } from "../../../protocols/criptography/decrypter";
 import { LoadAccountByTokenRepository } from "../../../protocols/db/account/load-account-by-token-repository";
 import { mockAccountModel, throwError } from "./../../../../domain/tests";
 import {

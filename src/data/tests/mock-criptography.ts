@@ -1,5 +1,5 @@
+import { Decrypter } from "../protocols/criptography/decrypter";
 import { Encrypter } from "../protocols/criptography/encrypter";
-import { Decrypter } from "../protocols/criptography/encrypter copy";
 import { HashComparer } from "../protocols/criptography/hash-compare";
 import { Hasher } from "../protocols/criptography/hasher";
 

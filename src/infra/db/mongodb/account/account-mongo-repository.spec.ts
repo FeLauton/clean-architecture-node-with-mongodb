@@ -6,7 +6,7 @@ import { AccountMongoRepository } from "./account-mongo-repository";
 
 let accountCollection: Collection;
 
-const makeAccountId = async (
+const mockAccountId = async (
   accessToken?: string,
   role?: string
 ): Promise<string> => {
@@ -56,7 +56,7 @@ describe("Account Mongo Repository", () => {
   describe("loadAccountByEmail()", () => {
     test("Should return an account on loadAccountByEmail success", async () => {
       const sut = makeSut();
-      await makeAccountId();
+      await mockAccountId();
       const account = await sut.loadAccountByEmail("any_email@mail.com");
       expect(account).toBeTruthy();
       expect(account.id).toBeTruthy();
@@ -75,7 +75,7 @@ describe("Account Mongo Repository", () => {
   describe("updateAccessToken()", () => {
     test("Should update the account accessToken on updateAccessToken", async () => {
       const sut = makeSut();
-      const accountId = await makeAccountId();
+      const accountId = await mockAccountId();
       let account = await findOneAccountById(accountId);
       expect(account?.accessToken).toBeFalsy();
       await sut.updateAccessToken(accountId, "any_token");
@@ -88,7 +88,7 @@ describe("Account Mongo Repository", () => {
   describe("loadAccountByToken()", () => {
     test("Should return an account on loadAccountByToken success without role", async () => {
       const sut = makeSut();
-      await makeAccountId("any_token");
+      await mockAccountId("any_token");
       const account = await sut.loadAccountByToken("any_token");
       expect(account).toBeTruthy();
       expect(account.id).toBeTruthy();
@@ -99,7 +99,7 @@ describe("Account Mongo Repository", () => {
 
     test("Should return an account on loadAccountByToken success with admin token", async () => {
       const sut = makeSut();
-      await makeAccountId("any_token", "admin");
+      await mockAccountId("any_token", "admin");
       const account = await sut.loadAccountByToken("any_token", "admin");
       expect(account).toBeTruthy();
       expect(account.id).toBeTruthy();
@@ -110,7 +110,7 @@ describe("Account Mongo Repository", () => {
 
     test("Should return an account on loadAccountByToken if user is admin", async () => {
       const sut = makeSut();
-      await makeAccountId("any_token", "admin");
+      await mockAccountId("any_token", "admin");
       const account = await sut.loadAccountByToken("any_token", "any_token");
       expect(account).toBeTruthy();
       expect(account.id).toBeTruthy();
@@ -121,7 +121,7 @@ describe("Account Mongo Repository", () => {
 
     test("Should return null on loadAccountByToken success with invalid token", async () => {
       const sut = makeSut();
-      await makeAccountId("any_token");
+      await mockAccountId("any_token");
       const account = await sut.loadAccountByToken("any_token", "admin");
       expect(account).toBeFalsy();
     });

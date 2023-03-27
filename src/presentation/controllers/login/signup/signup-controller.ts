@@ -1,17 +1,17 @@
-import { forbidden } from "../../../helpers/http/http-helpers";
 import { EmailInUseError } from "../../../errors/email-in-use-error";
 import {
   badRequest,
+  forbidden,
   ok,
   serverError,
 } from "../../../helpers/http/http-helpers";
 import {
+  AddAccount,
+  Authentication,
   Controller,
   HttpRequest,
   HttpResponse,
-  AddAccount,
   Validation,
-  Authentication,
 } from "./signup-controller-protocols";
 
 export class SignUpController implements Controller {
@@ -36,8 +36,11 @@ export class SignUpController implements Controller {
         return forbidden(new EmailInUseError());
       }
 
-      const accessToken = await this.authentication.auth({ email, password });
-      return ok({ accessToken });
+      const authenticationModel = await this.authentication.auth({
+        email,
+        password,
+      });
+      return ok(authenticationModel);
     } catch (error) {
       return serverError(error);
     }

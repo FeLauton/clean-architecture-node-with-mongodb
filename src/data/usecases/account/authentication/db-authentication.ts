@@ -1,11 +1,12 @@
-import { HashComparer } from "../../../protocols/criptography/hash-compare";
-import { Encrypter } from "../../../protocols/criptography/encrypter";
-import { LoadAccountByEmailRepository } from "../../../protocols/db/account/load-account-by-email-repository";
-import { UpdateAccessTokenRepository } from "../../../protocols/db/account/update-access-token-repository";
+import { AuthenticationModel } from "../../../../domain/models/authentication";
 import {
   Authentication,
   AuthenticationParams,
 } from "../../../../domain/usecases/account/authentication";
+import { Encrypter } from "../../../protocols/criptography/encrypter";
+import { HashComparer } from "../../../protocols/criptography/hash-compare";
+import { LoadAccountByEmailRepository } from "../../../protocols/db/account/load-account-by-email-repository";
+import { UpdateAccessTokenRepository } from "../../../protocols/db/account/update-access-token-repository";
 
 export class DbAuthentication implements Authentication {
   constructor(
@@ -14,7 +15,9 @@ export class DbAuthentication implements Authentication {
     private readonly encrypter: Encrypter,
     private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
   ) {}
-  async auth(authentication: AuthenticationParams): Promise<string> {
+  async auth(
+    authentication: AuthenticationParams
+  ): Promise<AuthenticationModel> {
     const account = await this.loadAccountByEmailRepository.loadAccountByEmail(
       authentication.email
     );
@@ -29,7 +32,7 @@ export class DbAuthentication implements Authentication {
           account.id,
           accessToken
         );
-        return accessToken;
+        return { accessToken, name: account.name };
       }
     }
     return null;

@@ -1,3 +1,4 @@
+import { LoadSurveyResult } from "../controllers/survey-result/load-survey-result/load-survey-result-controller-protocols";
 import {
   SaveSurveyResult,
   SaveSurveyResultParams,
@@ -12,4 +13,13 @@ export const mockSaveSurveyResult = (): SaveSurveyResult => {
     }
   }
   return new SaveSurveyResultStub();
+};
+
+export const mockLoadSurveyResult = (): LoadSurveyResult => {
+  class LoadSurveyResultStub implements LoadSurveyResult {
+    async load(id: string): Promise<SurveyResultModel> {
+      return Promise.resolve(mockSurveyResultModel());
+    }
+  }
+  return new LoadSurveyResultStub();
 };

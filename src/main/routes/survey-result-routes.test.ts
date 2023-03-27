@@ -79,4 +79,18 @@ describe("Survey Routes", () => {
         .expect(200);
     });
   });
+  describe("GET /surveys/:surveyId/results", () => {
+    test("Should return 403 on load surveys results without accessToken", async () => {
+      await request(app).get("/api/surveys/any_id/results").expect(403);
+    });
+
+    test("Should return 200 on load survey result with a valid accessToken", async () => {
+      const accessToken = await makeAccessToken();
+      const surveyId = await makeFakeSurvey();
+      await request(app)
+        .get(`/api/surveys/${surveyId}/results`)
+        .set("x-access-token", accessToken)
+        .expect(200);
+    });
+  });
 });

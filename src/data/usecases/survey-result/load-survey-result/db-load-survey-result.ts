@@ -1,4 +1,5 @@
 import {
+  LoadSurveyByIdRepository,
   LoadSurveyResult,
   LoadSurveyResultRepository,
   SurveyResultModel,
@@ -6,13 +7,18 @@ import {
 
 export class DbLoadSurveyResult implements LoadSurveyResult {
   constructor(
-    private readonly loadSurveyResultRepository: LoadSurveyResultRepository
+    private readonly loadSurveyResultRepository: LoadSurveyResultRepository,
+    private readonly loadSurveyByIdRepository: LoadSurveyByIdRepository
   ) {}
 
-  async load(surveyId: string): Promise<SurveyResultModel> {
+  async load(surveyId: string, accountId: string): Promise<SurveyResultModel> {
     const surveyResult = await this.loadSurveyResultRepository.loadBySurveyId(
-      surveyId
+      surveyId,
+      accountId
     );
+    if (!surveyResult) {
+      await this.loadSurveyByIdRepository.loadById(surveyId);
+    }
     return surveyResult;
   }
 }

@@ -5,10 +5,11 @@ import { SurveyResultModel } from "../../../../domain/models/survey-result";
 import { SaveSurveyResultParams } from "../../../../domain/usecases/survey-result/save-survey-result";
 import { MongoHelper } from "../helpers/mongo-helpers";
 import { QueryBuilder } from "../helpers/query-builder";
+import { LoadSurveyResultRepository } from "./../../../../data/protocols/db/survey-result/load-survey-result-repository";
 export class SaveSurveyResultMongoRepository
-  implements SaveSurveyResultRepository
+  implements SaveSurveyResultRepository, LoadSurveyResultRepository
 {
-  async save(surveyData: SaveSurveyResultParams): Promise<SurveyResultModel> {
+  async save(surveyData: SaveSurveyResultParams): Promise<void> {
     const { accountId, answer, date, surveyId } = surveyData;
     const surveyResultCollection = MongoHelper.getCollection("surveyResults");
     await surveyResultCollection.findOneAndUpdate(
@@ -24,10 +25,9 @@ export class SaveSurveyResultMongoRepository
       },
       { upsert: true }
     );
-    const surveyResult = await this.loadBySurveyId(surveyId, accountId);
-    return surveyResult;
   }
-  private async loadBySurveyId(
+
+  async loadBySurveyId(
     surveyId: string,
     accountId: string
   ): Promise<SurveyResultModel> {

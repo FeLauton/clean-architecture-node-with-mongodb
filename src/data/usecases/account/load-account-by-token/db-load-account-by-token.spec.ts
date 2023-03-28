@@ -50,12 +50,12 @@ describe("DbLoadAccountByToken UseCase", () => {
     expect(response).toBe(null);
   });
 
-  test("Should throw if Decrypter throws", async () => {
+  test("Should return null if Decrypter throws", async () => {
     const { sut, decrypterStub } = makeSut();
     jest.spyOn(decrypterStub, "decrypt").mockImplementationOnce(throwError);
     const { accessToken, role } = mockFakeAuthentication();
-    const promise = sut.load(accessToken, role);
-    expect(promise).rejects.toThrow();
+    const account = await sut.load(accessToken, role);
+    expect(account).toBeNull();
   });
 
   test("Should calls loadAccountByTokenRepository with correct values", async () => {

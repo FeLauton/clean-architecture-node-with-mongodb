@@ -9,8 +9,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "project": "tsconfig.eslint.json",
-    "tsconfigRootDir": "__dirname"
+    "project": "tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "jest"],
   "rules": {

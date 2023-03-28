@@ -1,14 +1,14 @@
-import { Authentication } from "src/domain/usecases/authentication";
-import { HttpRequest } from "src/presentation/controllers/add-survey-controller-protocols";
-import { LoginController } from "src/presentation/controllers/login-controller";
-import { MissingParamError } from "src/presentation/errors";
+import { Authentication } from "domain/usecases/authentication";
+import { HttpRequest } from "presentation/controllers/add-survey-controller-protocols";
+import { LoginController } from "presentation/controllers/login-controller";
+import { MissingParamError } from "presentation/errors";
 import {
   badRequest,
   ok,
   serverError,
   unauthorized,
-} from "src/presentation/helpers/http/http-helpers";
-import { Validation } from "src/presentation/protocols/validations";
+} from "presentation/helpers/http/http-helpers";
+import { Validation } from "presentation/protocols/validations";
 import { throwError } from "tests/domain/mocks";
 import { mockAuthentication } from "tests/presentation/mocks";
 import { mockValidation } from "tests/validation/mocks";

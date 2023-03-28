@@ -1,7 +1,7 @@
-import { Decrypter } from "src/data/protocols/criptography/decrypter";
-import { LoadAccountByTokenRepository } from "src/data/protocols/db/account/load-account-by-token-repository";
-import { DbLoadAccountByToken } from "src/data/usecases/db-load-account-by-token";
-import { LoadAccountByToken } from "src/domain/usecases/load-account-by-token";
+import { Decrypter } from "data/protocols/criptography/decrypter";
+import { LoadAccountByTokenRepository } from "data/protocols/db/account/load-account-by-token-repository";
+import { DbLoadAccountByToken } from "data/usecases/db-load-account-by-token";
+import { LoadAccountByToken } from "domain/usecases/load-account-by-token";
 import {
   mockDecrypter,
   mockLoadAccountByTokenRepository,

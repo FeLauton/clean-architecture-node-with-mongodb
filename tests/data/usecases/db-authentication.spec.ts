@@ -1,16 +1,16 @@
-import { Encrypter } from "src/data/protocols/criptography/encrypter";
-import { HashComparer } from "src/data/protocols/criptography/hash-compare";
-import { LoadAccountByEmailRepository } from "src/data/protocols/db/account/load-account-by-email-repository";
-import { UpdateAccessTokenRepository } from "src/data/protocols/db/account/update-access-token-repository";
-import { DbAuthentication } from "src/data/usecases/db-authentication";
-import { Authentication } from "src/domain/usecases/authentication";
-import { mockAuthenticationParams, throwError } from "tests/domain/mocks";
+import { Encrypter } from "data/protocols/criptography/encrypter";
+import { HashComparer } from "data/protocols/criptography/hash-compare";
+import { LoadAccountByEmailRepository } from "data/protocols/db/account/load-account-by-email-repository";
+import { UpdateAccessTokenRepository } from "data/protocols/db/account/update-access-token-repository";
+import { DbAuthentication } from "data/usecases/db-authentication";
+import { Authentication } from "domain/usecases/authentication";
 import {
   mockEncrypter,
   mockHashComparer,
   mockLoadAccountByEmailRepository,
   mockUpdateAccessTokenRepository,
-} from "../mocks";
+} from "tests/data/mocks";
+import { mockAuthenticationParams, throwError } from "tests/domain/mocks";
 
 interface SutTypes {
   sut: Authentication;

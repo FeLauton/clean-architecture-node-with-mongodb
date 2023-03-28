@@ -1,12 +1,12 @@
+import { AddSurvey } from "domain/usecases/add-survey";
 import MockDate from "mockdate";
-import { AddSurvey } from "src/domain/usecases/add-survey";
-import { AddSurveyController } from "src/presentation/controllers/add-survey-controller";
+import { AddSurveyController } from "presentation/controllers/add-survey-controller";
 import {
   badRequest,
   noContent,
   serverError,
-} from "src/presentation/helpers/http/http-helpers";
-import { HttpRequest, Validation } from "src/presentation/protocols";
+} from "presentation/helpers/http/http-helpers";
+import { HttpRequest, Validation } from "presentation/protocols";
 import { mockAddSurveyParams, throwError } from "tests/domain/mocks";
 import { mockAddSurvey } from "tests/presentation/mocks";
 import { mockValidation } from "tests/validation/mocks";

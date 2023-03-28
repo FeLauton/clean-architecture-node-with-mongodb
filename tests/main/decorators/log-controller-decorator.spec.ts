@@ -1,8 +1,8 @@
-import { LogErrorRepository } from "src/data/protocols/db/log/log-error-repository";
-import { LogControllerDecorator } from "src/main/decorators/log-controller-decorator";
-import { ok, serverError } from "src/presentation/helpers/http/http-helpers";
-import { Controller } from "src/presentation/protocols/controller";
-import { HttpRequest, HttpResponse } from "src/presentation/protocols/http";
+import { LogErrorRepository } from "data/protocols/db/log/log-error-repository";
+import { LogControllerDecorator } from "main/decorators/log-controller-decorator";
+import { ok, serverError } from "presentation/helpers/http/http-helpers";
+import { Controller } from "presentation/protocols/controller";
+import { HttpRequest, HttpResponse } from "presentation/protocols/http";
 import { mockLogErrorRepository } from "tests/data/mocks/mock-db-log";
 import { mockAccountModel } from "tests/domain/mocks/mock-account";
 

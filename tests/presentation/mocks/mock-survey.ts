@@ -1,7 +1,7 @@
-import { SurveyModel } from "src/domain/models/survey";
-import { AddSurvey, AddSurveyParams } from "src/domain/usecases/add-survey";
-import { LoadSurveys } from "src/domain/usecases/load-surveys";
-import { LoadSurveyById } from "src/presentation/controllers/save-survey-result-controller-protocols";
+import { SurveyModel } from "domain/models/survey";
+import { AddSurvey, AddSurveyParams } from "domain/usecases/add-survey";
+import { LoadSurveys } from "domain/usecases/load-surveys";
+import { LoadSurveyById } from "presentation/controllers/save-survey-result-controller-protocols";
 import { mockSurveyModel, mockSurveyModels } from "tests/domain/mocks";
 export const mockAddSurvey = (): AddSurvey => {
   class ValidationStub implements AddSurvey {

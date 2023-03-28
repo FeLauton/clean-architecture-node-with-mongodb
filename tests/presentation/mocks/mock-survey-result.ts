@@ -1,9 +1,9 @@
-import { LoadSurveyResult } from "src/domain/usecases/load-survey-result";
+import { LoadSurveyResult } from "domain/usecases/load-survey-result";
 import {
   SaveSurveyResult,
   SaveSurveyResultParams,
   SurveyResultModel,
-} from "src/presentation/controllers/save-survey-result-controller-protocols";
+} from "presentation/controllers/save-survey-result-controller-protocols";
 import { mockSurveyResultModel } from "tests/domain/mocks";
 
 export const mockSaveSurveyResult = (): SaveSurveyResult => {

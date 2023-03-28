@@ -1,14 +1,14 @@
+import { LoadSurveyResult } from "domain/usecases/load-survey-result";
+import { LoadSurveyById } from "domain/usecases/load-surveys-by-id";
 import MockDate from "mockdate";
-import { LoadSurveyResult } from "src/domain/usecases/load-survey-result";
-import { LoadSurveyById } from "src/domain/usecases/load-surveys-by-id";
-import { LoadSurveyResultController } from "src/presentation/controllers/load-survey-result-controller";
-import { InvalidParamError } from "src/presentation/errors/invalid-param-error";
+import { LoadSurveyResultController } from "presentation/controllers/load-survey-result-controller";
+import { InvalidParamError } from "presentation/errors/invalid-param-error";
 import {
   forbidden,
   ok,
   serverError,
-} from "src/presentation/helpers/http/http-helpers";
-import { HttpRequest } from "src/presentation/protocols/http";
+} from "presentation/helpers/http/http-helpers";
+import { HttpRequest } from "presentation/protocols/http";
 import { mockSurveyResultModel, throwError } from "tests/domain/mocks";
 import {
   mockLoadSurveyById,

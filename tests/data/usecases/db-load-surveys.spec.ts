@@ -1,6 +1,6 @@
+import { LoadSurveyRepository } from "data/protocols/db/survey/load-survey-repository";
+import { DbLoadSurveys } from "data/usecases/db-load-surveys";
 import MockDate from "mockdate";
-import { LoadSurveyRepository } from "src/data/protocols/db/survey/load-survey-repository";
-import { DbLoadSurveys } from "src/data/usecases/db-load-surveys";
 import { mockLoadSurveysRepository } from "tests/data/mocks";
 import { mockSurveyModels, throwError } from "tests/domain/mocks";
 

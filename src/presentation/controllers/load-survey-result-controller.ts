@@ -1,5 +1,9 @@
-import { InvalidParamError } from "../errors/invalid-param-error";
-import { forbidden, ok, serverError } from "../helpers/http/http-helpers";
+import { InvalidParamError } from "presentation/errors/invalid-param-error";
+import {
+  forbidden,
+  ok,
+  serverError,
+} from "presentation/helpers/http/http-helpers";
 import {
   Controller,
   HttpRequest,

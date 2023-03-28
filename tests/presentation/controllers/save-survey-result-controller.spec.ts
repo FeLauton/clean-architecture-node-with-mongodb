@@ -1,14 +1,14 @@
+import { LoadSurveyById } from "domain/usecases/load-surveys-by-id";
+import { SaveSurveyResult } from "domain/usecases/save-survey-result";
 import MockDate from "mockdate";
-import { LoadSurveyById } from "src/domain/usecases/load-surveys-by-id";
-import { SaveSurveyResult } from "src/domain/usecases/save-survey-result";
-import { SaveSurveyResultController } from "src/presentation/controllers/save-survey-result-controller";
-import { InvalidParamError } from "src/presentation/errors/invalid-param-error";
+import { SaveSurveyResultController } from "presentation/controllers/save-survey-result-controller";
+import { InvalidParamError } from "presentation/errors/invalid-param-error";
 import {
   forbidden,
   ok,
   serverError,
-} from "src/presentation/helpers/http/http-helpers";
-import { HttpRequest } from "src/presentation/protocols/http";
+} from "presentation/helpers/http/http-helpers";
+import { HttpRequest } from "presentation/protocols/http";
 import {
   mockSaveSurveyResultParams,
   mockSurveyResultModel,

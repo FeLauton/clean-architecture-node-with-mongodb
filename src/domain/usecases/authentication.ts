@@ -1,4 +1,4 @@
-import { AuthenticationModel } from "../models/authentication";
+import { AuthenticationModel } from "domain/models/authentication";
 
 export interface Authentication {
   auth(authentication: AuthenticationParams): Promise<AuthenticationModel>;

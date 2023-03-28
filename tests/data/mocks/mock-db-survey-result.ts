@@ -1,9 +1,9 @@
-import { LoadSurveyResultRepository } from "src/data/protocols/db/survey-result/load-survey-result-repository";
+import { LoadSurveyResultRepository } from "data/protocols/db/survey-result/load-survey-result-repository";
 import {
   SaveSurveyResultParams,
   SaveSurveyResultRepository,
-} from "src/data/usecases/db-save-survey-result-protocols";
-import { SurveyResultModel } from "src/domain/models/survey-result";
+} from "data/usecases/db-save-survey-result-protocols";
+import { SurveyResultModel } from "domain/models/survey-result";
 import { mockSurveyResultModel } from "tests/domain/mocks";
 
 export const mockSaveSurveyResultRepository =

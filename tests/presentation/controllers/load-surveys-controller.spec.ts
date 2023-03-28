@@ -1,12 +1,12 @@
+import { LoadSurveys } from "domain/usecases/load-surveys";
 import MockDate from "mockdate";
-import { LoadSurveys } from "src/domain/usecases/load-surveys";
-import { LoadSurveysController } from "src/presentation/controllers/load-surveys-controller";
+import { LoadSurveysController } from "presentation/controllers/load-surveys-controller";
 import {
   noContent,
   ok,
   serverError,
-} from "src/presentation/helpers/http/http-helpers";
-import { HttpRequest } from "src/presentation/protocols/http";
+} from "presentation/helpers/http/http-helpers";
+import { HttpRequest } from "presentation/protocols/http";
 import { mockSurveyModels, throwError } from "tests/domain/mocks";
 import { mockLoadSurveys } from "tests/presentation/mocks";
 

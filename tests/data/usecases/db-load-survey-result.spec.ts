@@ -1,9 +1,9 @@
-import MockDate from "mockdate";
-import { DbLoadSurveyResult } from "src/data/usecases/db-load-survey-result";
+import { DbLoadSurveyResult } from "data/usecases/db-load-survey-result";
 import {
   LoadSurveyByIdRepository,
   LoadSurveyResultRepository,
-} from "src/data/usecases/db-load-survey-result-protocols";
+} from "data/usecases/db-load-survey-result-protocols";
+import MockDate from "mockdate";
 import {
   mockLoadSurveyByIdRepository,
   mockLoadSurveyResultRepository,

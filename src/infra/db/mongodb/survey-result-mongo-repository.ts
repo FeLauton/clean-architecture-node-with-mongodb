@@ -1,9 +1,9 @@
+import { LoadSurveyResultRepository } from "data/protocols/db/survey-result/load-survey-result-repository";
+import { SaveSurveyResultRepository } from "data/protocols/db/survey-result/save-survey-result-repository";
+import { SurveyResultModel } from "domain/models/survey-result";
+import { SaveSurveyResultParams } from "domain/usecases/save-survey-result";
 import round from "mongo-round";
 import { ObjectId } from "mongodb";
-import { LoadSurveyResultRepository } from "../../../data/protocols/db/survey-result/load-survey-result-repository";
-import { SaveSurveyResultRepository } from "../../../data/protocols/db/survey-result/save-survey-result-repository";
-import { SurveyResultModel } from "../../../domain/models/survey-result";
-import { SaveSurveyResultParams } from "../../../domain/usecases/save-survey-result";
 import { MongoHelper } from "./mongo-helpers";
 import { QueryBuilder } from "./query-builder";
 export class SaveSurveyResultMongoRepository

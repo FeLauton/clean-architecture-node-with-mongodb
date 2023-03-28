@@ -2,7 +2,7 @@ import {
   badRequest,
   noContent,
   serverError,
-} from "../helpers/http/http-helpers";
+} from "presentation/helpers/http/http-helpers";
 import {
   AddSurvey,
   Controller,

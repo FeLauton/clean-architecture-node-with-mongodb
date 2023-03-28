@@ -1,6 +1,6 @@
 import { Express } from "express";
+import { noCache } from "main/middlewares/no-cache";
 import { serve, setup } from "swagger-ui-express";
-import { noCache } from "./../middlewares/no-cache";
 import swaggerConfig from "./docs";
 
 export default (app: Express): void => {

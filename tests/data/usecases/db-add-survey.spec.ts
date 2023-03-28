@@ -1,6 +1,6 @@
+import { DbAddSurvey } from "data/usecases/db-add-survey";
+import { AddSurveyRepository } from "data/usecases/db-add-survey-protocols";
 import MockDate from "mockdate";
-import { DbAddSurvey } from "src/data/usecases/db-add-survey";
-import { AddSurveyRepository } from "src/data/usecases/db-add-survey-protocols";
 import { mockAddSurveyRepository } from "tests/data/mocks";
 import { mockAddSurveyParams, throwError } from "tests/domain/mocks";
 

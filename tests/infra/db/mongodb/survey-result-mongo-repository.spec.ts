@@ -1,8 +1,8 @@
+import { SurveyModel } from "domain/models/survey";
+import { MongoHelper } from "infra/db/mongodb/mongo-helpers";
+import { SaveSurveyResultMongoRepository } from "infra/db/mongodb/survey-result-mongo-repository";
+import env from "main/config/env";
 import { Collection, ObjectId } from "mongodb";
-import { SurveyModel } from "src/domain/models/survey";
-import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
-import { SaveSurveyResultMongoRepository } from "src/infra/db/mongodb/survey-result-mongo-repository";
-import env from "src/main/config/env";
 import { mockAddAccountParams, mockAddSurveyParams } from "tests/domain/mocks";
 
 let surveyCollection: Collection;

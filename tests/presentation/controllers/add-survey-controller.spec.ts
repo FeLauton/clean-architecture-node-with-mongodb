@@ -1,15 +1,15 @@
 import MockDate from "mockdate";
-import { AddSurvey } from "../../../src/domain/usecases/add-survey";
-import { AddSurveyController } from "../../../src/presentation/controllers/add-survey-controller";
+import { AddSurvey } from "src/domain/usecases/add-survey";
+import { AddSurveyController } from "src/presentation/controllers/add-survey-controller";
 import {
   badRequest,
   noContent,
   serverError,
-} from "../../../src/presentation/helpers/http/http-helpers";
-import { HttpRequest, Validation } from "../../../src/presentation/protocols";
-import { mockAddSurveyParams, throwError } from "../../domain/mocks";
-import { mockValidation } from "../../validation/mocks";
-import { mockAddSurvey } from "../mocks";
+} from "src/presentation/helpers/http/http-helpers";
+import { HttpRequest, Validation } from "src/presentation/protocols";
+import { mockAddSurveyParams, throwError } from "tests/domain/mocks";
+import { mockAddSurvey } from "tests/presentation/mocks";
+import { mockValidation } from "tests/validation/mocks";
 const mockRequest = (): HttpRequest => ({
   body: mockAddSurveyParams(),
 });

@@ -1,13 +1,13 @@
-import { LoadAccountByToken } from "../../../src/domain/usecases/load-account-by-token";
-import { AccessDeniedError } from "../../../src/presentation/errors/access-denied-error";
+import { LoadAccountByToken } from "src/domain/usecases/load-account-by-token";
+import { AccessDeniedError } from "src/presentation/errors/access-denied-error";
 import {
   forbidden,
   ok,
   serverError,
-} from "../../../src/presentation/helpers/http/http-helpers";
-import { AuthMiddleware } from "../../../src/presentation/middlewares/auth-middleware";
-import { throwError } from "../../domain/mocks";
-import { mockLoadAccountByToken } from "../mocks/mock-account";
+} from "src/presentation/helpers/http/http-helpers";
+import { AuthMiddleware } from "src/presentation/middlewares/auth-middleware";
+import { throwError } from "tests/domain/mocks";
+import { mockLoadAccountByToken } from "tests/presentation/mocks";
 
 const mockRequest = () => ({
   headers: { "x-access-token": "any_token" },

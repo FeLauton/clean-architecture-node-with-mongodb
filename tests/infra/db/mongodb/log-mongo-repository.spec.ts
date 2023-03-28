@@ -1,7 +1,7 @@
 import { Collection } from "mongodb";
-import { MongoHelper } from "../../../../src/infra/db/mongodb/mongo-helpers";
-import env from "../../../../src/main/config/env";
-import { LogMongoRepository } from "./../../../../src/infra/db/mongodb/log-mongo-repository";
+import { LogMongoRepository } from "src/infra/db/mongodb/log-mongo-repository";
+import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
+import env from "src/main/config/env";
 
 describe("Log Mongo Repository", () => {
   let errorCollection: Collection;

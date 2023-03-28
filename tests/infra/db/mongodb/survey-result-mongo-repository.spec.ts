@@ -1,12 +1,9 @@
 import { Collection, ObjectId } from "mongodb";
-import { SurveyModel } from "../../../../src/domain/models/survey";
-import { MongoHelper } from "../../../../src/infra/db/mongodb/mongo-helpers";
-import { SaveSurveyResultMongoRepository } from "../../../../src/infra/db/mongodb/survey-result-mongo-repository";
-import env from "../../../../src/main/config/env";
-import {
-  mockAddAccountParams,
-  mockAddSurveyParams,
-} from "../../../domain/mocks";
+import { SurveyModel } from "src/domain/models/survey";
+import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
+import { SaveSurveyResultMongoRepository } from "src/infra/db/mongodb/survey-result-mongo-repository";
+import env from "src/main/config/env";
+import { mockAddAccountParams, mockAddSurveyParams } from "tests/domain/mocks";
 
 let surveyCollection: Collection;
 let surveyResultCollection: Collection;

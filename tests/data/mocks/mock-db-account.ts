@@ -1,12 +1,12 @@
-import { AddAccountRepository } from "../../../src/data/protocols/db/account/add-account-repository";
-import { LoadAccountByTokenRepository } from "../../../src/data/protocols/db/account/load-account-by-token-repository";
-import { UpdateAccessTokenRepository } from "../../../src/data/protocols/db/account/update-access-token-repository";
+import { AddAccountRepository } from "src/data/protocols/db/account/add-account-repository";
+import { LoadAccountByTokenRepository } from "src/data/protocols/db/account/load-account-by-token-repository";
+import { UpdateAccessTokenRepository } from "src/data/protocols/db/account/update-access-token-repository";
 import {
   AddAccountParams,
   LoadAccountByEmailRepository,
-} from "../../../src/data/usecases/db-add-account-protocols";
-import { AccountModel } from "../../../src/domain/models/account";
-import { mockAccountModel } from "./../../domain/mocks";
+} from "src/data/usecases/db-add-account-protocols";
+import { AccountModel } from "src/domain/models/account";
+import { mockAccountModel } from "tests/domain/mocks";
 
 export const mockUpdateAccessTokenRepository =
   (): UpdateAccessTokenRepository => {

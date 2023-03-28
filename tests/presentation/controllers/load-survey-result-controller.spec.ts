@@ -1,16 +1,19 @@
 import MockDate from "mockdate";
-import { LoadSurveyResult } from "../../../src/domain/usecases/load-survey-result";
-import { LoadSurveyById } from "../../../src/domain/usecases/load-surveys-by-id";
-import { LoadSurveyResultController } from "../../../src/presentation/controllers/load-survey-result-controller";
-import { InvalidParamError } from "../../../src/presentation/errors/invalid-param-error";
+import { LoadSurveyResult } from "src/domain/usecases/load-survey-result";
+import { LoadSurveyById } from "src/domain/usecases/load-surveys-by-id";
+import { LoadSurveyResultController } from "src/presentation/controllers/load-survey-result-controller";
+import { InvalidParamError } from "src/presentation/errors/invalid-param-error";
 import {
   forbidden,
   ok,
   serverError,
-} from "../../../src/presentation/helpers/http/http-helpers";
-import { HttpRequest } from "../../../src/presentation/protocols/http";
-import { mockSurveyResultModel, throwError } from "../../domain/mocks";
-import { mockLoadSurveyById, mockLoadSurveyResult } from "../mocks";
+} from "src/presentation/helpers/http/http-helpers";
+import { HttpRequest } from "src/presentation/protocols/http";
+import { mockSurveyResultModel, throwError } from "tests/domain/mocks";
+import {
+  mockLoadSurveyById,
+  mockLoadSurveyResult,
+} from "tests/presentation/mocks";
 
 const mockFakeRequest = (): HttpRequest => ({
   accountId: "any_account_id",

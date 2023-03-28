@@ -1,11 +1,8 @@
 import { Collection, ObjectId } from "mongodb";
-import { MongoHelper } from "../../../../src/infra/db/mongodb/mongo-helpers";
-import { SurveyMongoRepository } from "../../../../src/infra/db/mongodb/survey-mongo-repository";
-import env from "../../../../src/main/config/env";
-import {
-  mockAddAccountParams,
-  mockAddSurveyParams,
-} from "../../../domain/mocks";
+import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
+import { SurveyMongoRepository } from "src/infra/db/mongodb/survey-mongo-repository";
+import env from "src/main/config/env";
+import { mockAddAccountParams, mockAddSurveyParams } from "tests/domain/mocks";
 
 const mockAccountId = async (): Promise<string> => {
   const res = await accountCollection.insertOne(mockAddAccountParams());

@@ -1,14 +1,14 @@
-import { Validation } from "../../../../src/presentation/protocols/validations";
-import { EmailValidator } from "../../../../src/validation/protocols/email-validator";
+import { makeSignUpValidation } from "src/main/factories/controllers/signup-validation-factory";
+import { Validation } from "src/presentation/protocols/validations";
+import { EmailValidator } from "src/validation/protocols/email-validator";
 import {
   CompareFieldsValidation,
   EmailValidation,
   RequiredFieldValidation,
   ValidationComposite,
-} from "../../../../src/validation/validators";
-import { makeSignUpValidation } from "./../../../../src/main/factories/controllers/signup-validation-factory";
+} from "src/validation/validators";
 
-jest.mock("../../../../src/validation/validators/validation-composite");
+jest.mock("src/validation/validators/validation-composite");
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
     isValid(email: string): boolean {

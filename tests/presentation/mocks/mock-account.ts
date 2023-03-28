@@ -1,15 +1,12 @@
-import { AuthenticationModel } from "../../../src/domain/models/authentication";
-import { LoadAccountByToken } from "../../../src/domain/usecases/load-account-by-token";
-import { mockAccountModel } from "../../domain/mocks";
-import { AccountModel } from "./../../../src/domain/models/account";
-import {
-  AddAccount,
-  AddAccountParams,
-} from "./../../../src/domain/usecases/add-account";
+import { AccountModel } from "src/domain/models/account";
+import { AuthenticationModel } from "src/domain/models/authentication";
+import { AddAccount, AddAccountParams } from "src/domain/usecases/add-account";
 import {
   Authentication,
   AuthenticationParams,
-} from "./../../../src/domain/usecases/authentication";
+} from "src/domain/usecases/authentication";
+import { LoadAccountByToken } from "src/domain/usecases/load-account-by-token";
+import { mockAccountModel } from "tests/domain/mocks";
 
 export const mockAuthentication = () => {
   class AuthenticationStub implements Authentication {

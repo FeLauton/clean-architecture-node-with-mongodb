@@ -1,8 +1,8 @@
 import { Collection, ObjectId } from "mongodb";
-import { AccountMongoRepository } from "../../../../src/infra/db/mongodb/account-mongo-repository";
-import { MongoHelper } from "../../../../src/infra/db/mongodb/mongo-helpers";
-import env from "../../../../src/main/config/env";
-import { mockAddAccountParams } from "../../../domain/mocks";
+import { AccountMongoRepository } from "src/infra/db/mongodb/account-mongo-repository";
+import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
+import env from "src/main/config/env";
+import { mockAddAccountParams } from "tests/domain/mocks";
 
 let accountCollection: Collection;
 

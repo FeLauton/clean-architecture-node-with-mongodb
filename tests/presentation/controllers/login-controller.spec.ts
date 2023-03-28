@@ -1,17 +1,17 @@
-import { Authentication } from "../../../src/domain/usecases/authentication";
-import { HttpRequest } from "../../../src/presentation/controllers/add-survey-controller-protocols";
-import { LoginController } from "../../../src/presentation/controllers/login-controller";
-import { MissingParamError } from "../../../src/presentation/errors";
+import { Authentication } from "src/domain/usecases/authentication";
+import { HttpRequest } from "src/presentation/controllers/add-survey-controller-protocols";
+import { LoginController } from "src/presentation/controllers/login-controller";
+import { MissingParamError } from "src/presentation/errors";
 import {
   badRequest,
   ok,
   serverError,
   unauthorized,
-} from "../../../src/presentation/helpers/http/http-helpers";
-import { Validation } from "../../../src/presentation/protocols/validations";
-import { throwError } from "../../domain/mocks";
-import { mockValidation } from "../../validation/mocks";
-import { mockAuthentication } from "../mocks";
+} from "src/presentation/helpers/http/http-helpers";
+import { Validation } from "src/presentation/protocols/validations";
+import { throwError } from "tests/domain/mocks";
+import { mockAuthentication } from "tests/presentation/mocks";
+import { mockValidation } from "tests/validation/mocks";
 
 const mockRequest = (): HttpRequest => ({
   body: {

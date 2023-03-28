@@ -1,14 +1,14 @@
 import MockDate from "mockdate";
-import { LoadSurveys } from "../../../src/domain/usecases/load-surveys";
-import { LoadSurveysController } from "../../../src/presentation/controllers/load-surveys-controller";
+import { LoadSurveys } from "src/domain/usecases/load-surveys";
+import { LoadSurveysController } from "src/presentation/controllers/load-surveys-controller";
 import {
   noContent,
   ok,
   serverError,
-} from "../../../src/presentation/helpers/http/http-helpers";
-import { HttpRequest } from "../../../src/presentation/protocols/http";
-import { mockSurveyModels, throwError } from "../../domain/mocks";
-import { mockLoadSurveys } from "../mocks";
+} from "src/presentation/helpers/http/http-helpers";
+import { HttpRequest } from "src/presentation/protocols/http";
+import { mockSurveyModels, throwError } from "tests/domain/mocks";
+import { mockLoadSurveys } from "tests/presentation/mocks";
 
 const mockRequest = (): HttpRequest => ({
   accountId: "any_id",

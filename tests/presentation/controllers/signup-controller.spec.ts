@@ -1,22 +1,22 @@
-import { AddAccount } from "../../../src/domain/usecases/add-account";
-import { Authentication } from "../../../src/domain/usecases/authentication";
-import { SignUpController } from "../../../src/presentation/controllers/signup-controller";
+import { AddAccount } from "src/domain/usecases/add-account";
+import { Authentication } from "src/domain/usecases/authentication";
+import { SignUpController } from "src/presentation/controllers/signup-controller";
 import {
   EmailInUseError,
   MissingParamError,
   ServerError,
-} from "../../../src/presentation/errors";
+} from "src/presentation/errors";
 import {
   badRequest,
   forbidden,
   ok,
   serverError,
-} from "../../../src/presentation/helpers/http/http-helpers";
-import { HttpRequest } from "../../../src/presentation/protocols/http";
-import { Validation } from "../../../src/presentation/protocols/validations";
-import { throwError } from "../../domain/mocks";
-import { mockAddAccount, mockAuthentication } from "../../presentation/mocks";
-import { mockValidation } from "../../validation/mocks";
+} from "src/presentation/helpers/http/http-helpers";
+import { HttpRequest } from "src/presentation/protocols/http";
+import { Validation } from "src/presentation/protocols/validations";
+import { throwError } from "tests/domain/mocks";
+import { mockAddAccount, mockAuthentication } from "tests/presentation/mocks";
+import { mockValidation } from "tests/validation/mocks";
 
 const mockRequest = (): HttpRequest => ({
   body: {

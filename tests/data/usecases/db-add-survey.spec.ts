@@ -1,8 +1,8 @@
 import MockDate from "mockdate";
-import { DbAddSurvey } from "../../../src/data/usecases/db-add-survey";
-import { AddSurveyRepository } from "../../../src/data/usecases/db-add-survey-protocols";
-import { mockAddSurveyRepository } from "../mocks";
-import { mockAddSurveyParams, throwError } from "./../../domain/mocks";
+import { DbAddSurvey } from "src/data/usecases/db-add-survey";
+import { AddSurveyRepository } from "src/data/usecases/db-add-survey-protocols";
+import { mockAddSurveyRepository } from "tests/data/mocks";
+import { mockAddSurveyParams, throwError } from "tests/domain/mocks";
 
 interface SutTypes {
   sut: DbAddSurvey;

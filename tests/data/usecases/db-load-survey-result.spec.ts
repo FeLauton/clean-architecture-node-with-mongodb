@@ -1,14 +1,14 @@
 import MockDate from "mockdate";
-import { DbLoadSurveyResult } from "../../../src/data/usecases/db-load-survey-result";
+import { DbLoadSurveyResult } from "src/data/usecases/db-load-survey-result";
 import {
   LoadSurveyByIdRepository,
   LoadSurveyResultRepository,
-} from "../../../src/data/usecases/db-load-survey-result-protocols";
-import { mockSurveyResultModel, throwError } from "../../domain/mocks";
+} from "src/data/usecases/db-load-survey-result-protocols";
 import {
   mockLoadSurveyByIdRepository,
   mockLoadSurveyResultRepository,
-} from "../mocks";
+} from "tests/data/mocks";
+import { mockSurveyResultModel, throwError } from "tests/domain/mocks";
 
 interface SutTypes {
   sut: DbLoadSurveyResult;

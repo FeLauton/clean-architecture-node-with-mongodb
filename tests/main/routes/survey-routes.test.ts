@@ -1,10 +1,10 @@
 import { hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { Collection } from "mongodb";
+import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
+import app from "src/main/config/app";
+import env from "src/main/config/env";
 import request from "supertest";
-import { MongoHelper } from "../../../src/infra/db/mongodb/mongo-helpers";
-import app from "../../../src/main/config/app";
-import env from "../../../src/main/config/env";
 
 let surveyCollection: Collection;
 let accountCollection: Collection;

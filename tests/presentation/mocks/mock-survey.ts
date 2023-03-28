@@ -1,11 +1,8 @@
-import { SurveyModel } from "../../../src/domain/models/survey";
-import { LoadSurveyById } from "../../../src/presentation/controllers/save-survey-result-controller-protocols";
-import { mockSurveyModel, mockSurveyModels } from "../../domain/mocks";
-import {
-  AddSurvey,
-  AddSurveyParams,
-} from "./../../../src/domain/usecases/add-survey";
-import { LoadSurveys } from "./../../../src/domain/usecases/load-surveys";
+import { SurveyModel } from "src/domain/models/survey";
+import { AddSurvey, AddSurveyParams } from "src/domain/usecases/add-survey";
+import { LoadSurveys } from "src/domain/usecases/load-surveys";
+import { LoadSurveyById } from "src/presentation/controllers/save-survey-result-controller-protocols";
+import { mockSurveyModel, mockSurveyModels } from "tests/domain/mocks";
 export const mockAddSurvey = (): AddSurvey => {
   class ValidationStub implements AddSurvey {
     async add(data: AddSurveyParams): Promise<void> {

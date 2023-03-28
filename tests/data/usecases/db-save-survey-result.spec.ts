@@ -1,18 +1,18 @@
 import MockDate from "mockdate";
-import { DbSaveSurveyResult } from "../../../src/data/usecases/db-save-survey-result";
+import { DbSaveSurveyResult } from "src/data/usecases/db-save-survey-result";
 import {
   LoadSurveyResultRepository,
   SaveSurveyResultRepository,
-} from "../../../src/data/usecases/db-save-survey-result-protocols";
+} from "src/data/usecases/db-save-survey-result-protocols";
 import {
   mockLoadSurveyResultRepository,
   mockSaveSurveyResultRepository,
-} from "../mocks";
+} from "tests/data/mocks";
 import {
   mockSaveSurveyResultParams,
   mockSurveyResultModel,
   throwError,
-} from "./../../domain/mocks";
+} from "tests/domain/mocks";
 
 interface SutTypes {
   sut: DbSaveSurveyResult;

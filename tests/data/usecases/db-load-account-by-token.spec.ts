@@ -1,9 +1,12 @@
-import { Decrypter } from "../../../src/data/protocols/criptography/decrypter";
-import { LoadAccountByTokenRepository } from "../../../src/data/protocols/db/account/load-account-by-token-repository";
-import { DbLoadAccountByToken } from "../../../src/data/usecases/db-load-account-by-token";
-import { mockAccountModel, throwError } from "../../domain/mocks";
-import { mockDecrypter, mockLoadAccountByTokenRepository } from "../mocks";
-import { LoadAccountByToken } from "./../../../src/domain/usecases/load-account-by-token";
+import { Decrypter } from "src/data/protocols/criptography/decrypter";
+import { LoadAccountByTokenRepository } from "src/data/protocols/db/account/load-account-by-token-repository";
+import { DbLoadAccountByToken } from "src/data/usecases/db-load-account-by-token";
+import { LoadAccountByToken } from "src/domain/usecases/load-account-by-token";
+import {
+  mockDecrypter,
+  mockLoadAccountByTokenRepository,
+} from "tests/data/mocks";
+import { mockAccountModel, throwError } from "tests/domain/mocks";
 
 const mockFakeAuthentication = () => ({
   accessToken: "any_token",

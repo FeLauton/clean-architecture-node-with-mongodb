@@ -1,9 +1,9 @@
 import { hash } from "bcrypt";
 import { Collection } from "mongodb";
+import { MongoHelper } from "src/infra/db/mongodb/mongo-helpers";
+import app from "src/main/config/app";
+import env from "src/main/config/env";
 import request from "supertest";
-import { MongoHelper } from "../../../src/infra/db/mongodb/mongo-helpers";
-import app from "../../../src/main/config/app";
-import env from "../../../src/main/config/env";
 
 let accountCollection: Collection;
 

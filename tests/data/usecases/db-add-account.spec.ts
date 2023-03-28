@@ -1,19 +1,19 @@
-import { DbAddAccount } from "../../../src/data/usecases/db-add-account";
+import { DbAddAccount } from "src/data/usecases/db-add-account";
 import {
   AddAccountRepository,
   Hasher,
   LoadAccountByEmailRepository,
-} from "../../../src/data/usecases/db-add-account-protocols";
-import {
-  mockAccountModel,
-  mockAddAccountParams,
-  throwError,
-} from "../../domain/mocks";
+} from "src/data/usecases/db-add-account-protocols";
 import {
   mockAddAccountRepository,
   mockHasher,
   mockLoadAccountByEmailRepository,
-} from "../mocks";
+} from "tests/data/mocks";
+import {
+  mockAccountModel,
+  mockAddAccountParams,
+  throwError,
+} from "tests/domain/mocks";
 
 interface SutTypes {
   sut: DbAddAccount;

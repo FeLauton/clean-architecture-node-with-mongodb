@@ -1,7 +1,7 @@
-import { DbLoadSurveyResult } from "../../../../../data/usecases/survey-result/load-survey-result/db-load-survey-result";
-import { LoadSurveyResult } from "../../../../../domain/usecases/survey-result/load-survey-result";
-import { SaveSurveyResultMongoRepository } from "../../../../../infra/db/mongodb/survey-result/survey-result-mongo-repository";
-import { SurveyMongoRepository } from "../../../../../infra/db/mongodb/survey/survey-mongo-repository";
+import { DbLoadSurveyResult } from "../../../../../data/usecases/db-load-survey-result";
+import { LoadSurveyResult } from "../../../../../domain/usecases/load-survey-result";
+import { SurveyMongoRepository } from "../../../../../infra/db/mongodb/survey-mongo-repository";
+import { SaveSurveyResultMongoRepository } from "../../../../../infra/db/mongodb/survey-result-mongo-repository";
 
 export const makeDbLoadSurveyResultFactory = (): LoadSurveyResult => {
   const saveSurveyResultMongoRepository = new SaveSurveyResultMongoRepository();

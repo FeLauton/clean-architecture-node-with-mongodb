@@ -1,9 +1,8 @@
 module.exports = {
-  roots: ["<rootDir>/src"],
+  roots: ["<rootDir>/tests"],
   collectCoverageFrom: [
     "<rootDir>/src/**/*.ts",
-    "!**/tests/**",
-    "!<rootDir>/src/main/**",
+    "!<rootDir>/src/main/config/env.ts",
     "!<rootDir>/src/**/*protocols.ts",
     "!<rootDir>/src/presentation/protocols/index.ts",
   ],
@@ -15,6 +14,7 @@ module.exports = {
     ".+\\.ts$": "ts-jest",
   },
   moduleNameMapper: {
-    "^~(.*)$": "<rootDir>/src/$1",
+    "@/tests/(.*)": "<rootDir>/tests/$1",
+    "@/(.*)": "<rootDir>/src/$1",
   },
 };

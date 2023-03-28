@@ -1,4 +1,4 @@
-import { SurveyResultModel } from "../../../usecases/survey-result/load-survey-result/db-load-survey-result-protocols";
+import { SurveyResultModel } from "../../../usecases/db-load-survey-result-protocols";
 
 export interface LoadSurveyResultRepository {
   loadBySurveyId(

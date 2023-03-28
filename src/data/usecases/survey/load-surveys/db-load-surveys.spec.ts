@@ -29,20 +29,20 @@ describe("DbLoadSurveys UseCase", () => {
   test("Should calls loadSurveys", async () => {
     const { sut, loadSurveysStub } = makeSut();
     const loadAllSpy = jest.spyOn(loadSurveysStub, "loadAll");
-    await sut.load();
-    expect(loadAllSpy).toHaveBeenCalled();
+    await sut.load("any_id");
+    expect(loadAllSpy).toHaveBeenCalledWith("any_id");
   });
 
   test("Should throw if loadSurveys throws", async () => {
     const { sut, loadSurveysStub } = makeSut();
     jest.spyOn(loadSurveysStub, "loadAll").mockImplementationOnce(throwError);
-    const promise = sut.load();
+    const promise = sut.load("any_id");
     expect(promise).rejects.toThrow();
   });
 
   test("Should DbLoadSurveys a list of surveys on success", async () => {
     const { sut } = makeSut();
-    const surveys = await sut.load();
+    const surveys = await sut.load("any_id");
     expect(surveys).toEqual(mockSurveyModels());
   });
 });

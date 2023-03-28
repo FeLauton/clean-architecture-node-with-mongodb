@@ -1,11 +1,11 @@
-import { LoadAccountByTokenRepository } from "./../../../../data/protocols/db/account/load-account-by-token-repository";
-import { AccountModel } from "../../../../domain/models/account";
+import { ObjectId } from "mongodb";
 import { AddAccountRepository } from "../../../../data/protocols/db/account/add-account-repository";
-import { AddAccountParams } from "../../../../domain/usecases/account/add-account";
-import { MongoHelper } from "../helpers/mongo-helpers";
 import { LoadAccountByEmailRepository } from "../../../../data/protocols/db/account/load-account-by-email-repository";
 import { UpdateAccessTokenRepository } from "../../../../data/protocols/db/account/update-access-token-repository";
-import { ObjectId } from "mongodb";
+import { AccountModel } from "../../../../domain/models/account";
+import { AddAccountParams } from "../../../../domain/usecases/account/add-account";
+import { MongoHelper } from "../helpers/mongo-helpers";
+import { LoadAccountByTokenRepository } from "./../../../../data/protocols/db/account/load-account-by-token-repository";
 
 export class AccountMongoRepository
   implements
@@ -20,7 +20,7 @@ export class AccountMongoRepository
     const account = await accountCollection.findOne({
       _id: result.insertedId,
     });
-    return MongoHelper.mongoIdMap(account);
+    return MongoHelper.map(account);
   }
 
   async loadAccountByEmail(email: string): Promise<AccountModel> {
@@ -28,7 +28,7 @@ export class AccountMongoRepository
     const account = await accountCollection.findOne({
       email,
     });
-    return account && MongoHelper.mongoIdMap(account);
+    return account && MongoHelper.map(account);
   }
 
   async updateAccessToken(id: string, token: string): Promise<void> {
@@ -55,6 +55,6 @@ export class AccountMongoRepository
         },
       ],
     });
-    return account && MongoHelper.mongoIdMap(account);
+    return account && MongoHelper.map(account);
   }
 }

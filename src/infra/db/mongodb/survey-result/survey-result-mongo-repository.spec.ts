@@ -13,7 +13,7 @@ let accountCollection: Collection;
 const mockSurvey = async (): Promise<SurveyModel> => {
   const res = await surveyCollection.insertOne(mockAddSurveyParams());
   const survey = await surveyCollection.findOne({ _id: res.insertedId });
-  return MongoHelper.mongoIdMap(survey);
+  return MongoHelper.map(survey);
 };
 
 const mockAccountId = async (): Promise<string> => {

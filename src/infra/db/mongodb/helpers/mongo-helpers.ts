@@ -1,4 +1,4 @@
-import { MongoClient, Collection } from "mongodb";
+import { Collection, MongoClient } from "mongodb";
 
 export const MongoHelper = {
   client: null as MongoClient,
@@ -18,8 +18,12 @@ export const MongoHelper = {
     return this.client.db().collection(name);
   },
 
-  mongoIdMap<T>(collection: any): T {
-    const { _id, ...collectionWithoutIds } = collection;
-    return Object.assign({}, collectionWithoutIds, { id: _id.toHexString() });
+  map: (data: any): any => {
+    const { _id, ...rest } = data;
+    return { ...rest, id: _id.toHexString() };
+  },
+
+  mapCollection: (collection: any[]): any[] => {
+    return collection.map((c) => MongoHelper.map(c));
   },
 };
